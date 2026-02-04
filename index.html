@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suite Neonatal Pro</title>
+    <style>
+        :root {
+            --resp: #fef2f2; --resp-txt: #991b1b; --resp-bord: #fecaca;
+            --farm: #f0f9ff; --farm-txt: #075985; --farm-bord: #bae6fd;
+            --val: #f0fdf4; --val-txt: #166534; --val-bord: #bbf7d0;
+            --esc: #fffbeb; --esc-txt: #92400e; --esc-bord: #fde68a;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; margin: 0; padding: 15px; display: flex; justify-content: center; }
+        .card { background: white; padding: 20px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); width: 100%; max-width: 420px; text-align: center; }
+        h1 { color: #1e40af; margin: 0; font-size: 1.4em; }
+        .subtitle { color: #64748b; font-size: 0.8em; margin-bottom: 15px; font-weight: 600; }
+        .section-header { text-align: left; font-size: 0.65em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin: 15px 0 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn { text-decoration: none; padding: 12px 5px; border-radius: 16px; border: 1px solid; display: flex; flex-direction: column; align-items: center; transition: 0.2s; font-weight: 600; font-size: 0.75em; }
+        .btn:active { transform: scale(0.96); opacity: 0.8; }
+        .icon { font-size: 20px; margin-bottom: 4px; }
+        .b-resp { background: var(--resp); border-color: var(--resp-bord); color: var(--resp-txt); }
+        .b-farm { background: var(--farm); border-color: var(--farm-bord); color: var(--farm-txt); }
+        .b-val { background: var(--val); border-color: var(--val-bord); color: var(--val-txt); }
+        .b-esc { background: var(--esc); border-color: var(--esc-bord); color: var(--esc-txt); }
+        .footer { margin-top: 20px; font-size: 9px; color: #94a3b8; text-transform: uppercase; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Suite Neonatal Pro</h1>
+        <div class="subtitle">UCIN - H.G.Z. N° 11 JALAPA</div>
+
+        <div class="section-header">Respiratorio y Aspiración</div>
+        <div class="grid">
+            <a href="ventilacion.html" class="btn b-resp"><span class="icon">💨</span>Ventilación</a>
+            <a href="aspirador.html" class="btn b-resp"><span class="icon">🩺</span>Evidencia Asp.</a>
+            <a href="neumonía.html" class="btn b-resp"><span class="icon">🛡️</span>Prevención NAV</a>
+            <a href="signosneu.html" class="btn b-resp"><span class="icon">🚨</span>Alarmas NAV</a>
+        </div>
+
+        <div class="section-header">Farmacia y Cálculo</div>
+        <div class="grid">
+            <a href="calculadora_dosis.html" class="btn b-farm"><span class="icon">🧮</span>Calc. de Dosis</a>
+            <a href="dilucion.html" class="btn b-farm"><span class="icon">💊</span>Dilución</a>
+            <a href="laboratorio.html" class="btn b-farm"><span class="icon">🧪</span>Laboratorio</a>
+            <a href="signos.html" class="btn b-farm"><span class="icon">🌡️</span>Signos Vitales</a>
+        </div>
+
+        <div class="section-header">Valoración y Escalas</div>
+        <div class="grid">
+            <a href="pae.html" class="btn b-val"><span class="icon">📋</span>NANDA/NIC</a>
+            <a href="clasificacion.html" class="btn b-esc"><span class="icon">📊</span>Clasificación</a>
+            <a href="apgar.html" class="btn b-esc"><span class="icon">👶</span>Apgar</a>
+            <a href="silverman.html" class="btn b-esc"><span class="icon">🫁</span>Silverman</a>
+            <a href="capurro.html" class="btn b-esc"><span class="icon">📏</span>Capurro</a>
+        </div>
+
+        <div class="footer">Actualizado 03/02/2026</div>
+    </div>
+</body>
+</html>

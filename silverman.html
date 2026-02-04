@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Silverman</title>
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; padding: 20px; }
+        .card { background: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; }
+        select { width: 100%; padding: 10px; margin: 10px 0; background: #333; color: white; border: none; border-radius: 5px; }
+        .btn { display: block; width: 100%; padding: 15px; background: #28a745; color: white; text-align: center; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        #res { margin-top: 20px; text-align: center; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>🫁 Test de Silverman</h2>
+    <label>Mov. tóraco-abdominal:</label>
+    <select id="s1"><option value="0">0 - Rítmicos/Regulares</option><option value="1">1 - Tórax inmóvil</option><option value="2">2 - Disociación</option></select>
+    
+    <label>Tiraje intercostal:</label>
+    <select id="s2"><option value="0">0 - Ausente</option><option value="1">1 - Leve</option><option value="2">2 - Marcado</option></select>
+    
+    <label>Retracción xifoidea:</label>
+    <select id="s3"><option value="0">0 - Ausente</option><option value="1">1 - Leve</option><option value="2">2 - Marcada</option></select>
+    
+    <label>Aleteo nasal:</label>
+    <select id="s4"><option value="0">0 - Ausente</option><option value="1">1 - Leve</option><option value="2">2 - Marcado</option></select>
+    
+    <label>Quejido espiratorio:</label>
+    <select id="s5"><option value="0">0 - Ausente</option><option value="1">1 - Audible con esteto</option><option value="2">2 - Audible a distancia</option></select>
+
+    <button class="btn" onclick="calcS()">Calcular Silverman</button>
+    <div id="res"></div>
+    <a href="index.html" style="color: #bbb; display: block; text-align: center; margin-top: 15px; text-decoration: none;">← Volver</a>
+</div>
+<script>
+function calcS() {
+    let t = parseInt(document.getElementById('s1').value) + parseInt(document.getElementById('s2').value) + 
+            parseInt(document.getElementById('s3').value) + parseInt(document.getElementById('s4').value) + 
+            parseInt(document.getElementById('s5').value);
+    let m = t === 0 ? "Sin dificultad" : (t <= 3 ? "Leve" : (t <= 5 ? "Moderada" : "Grave"));
+    document.getElementById('res').innerHTML = "Puntaje: " + t + "<br>Grado: " + m;
+}
+</script>
+</body>
+</html>

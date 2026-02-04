@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Dilución</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f4f8; }
+        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        h2 { color: #1a73e8; text-align: center; }
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        select, input { width: 100%; padding: 12px; margin-top: 8px; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-size: 16px; }
+        .resultado { margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 10px; color: #004085; display: none; }
+        .volver { display: block; text-align: center; margin-top: 20px; text-decoration: none; color: #666; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>💊 Dilución</h2>
+        <label>Medicamento:</label>
+        <select id="med" onchange="calc()">
+            <option value="none">-- Seleccionar --</option>
+            <option value="ampicilina">Ampicilina (30-100 mg/ml)</option>
+            <option value="amikacina">Amikacina (5-10 mg/ml)</option>
+            <option value="cefotaxima">Cefotaxima (30-100 mg/ml)</option>
+            <option value="meropenem">Meropenem (20-50 mg/ml)</option>
+            <option value="vancomicina">Vancomicina (5 mg/ml)</option>
+        </select>
+
+        <label>Dosis indicada (mg):</label>
+        <input type="number" id="m" placeholder="Ej: 100" oninput="calc()">
+
+        <div id="r_box" class="resultado">
+            <strong>Volumen a administrar:</strong><br>
+            <span id="v_text"></span>
+        </div>
+        <a href="index.html" class="volver">← Volver</a>
+    </div>
+
+    <script>
+    function calc() {
+        const med = document.getElementById('med').value;
+        const dosis = parseFloat(document.getElementById('m').value);
+        const box = document.getElementById('r_box');
+        const res = document.getElementById('v_text');
+
+        if (!dosis || med === "none") { box.style.display = "none"; return; }
+        box.style.display = "block";
+
+        let cMin, cMax;
+        switch(med) {
+            case "ampicilina": case "cefotaxima": cMin = 30; cMax = 100; break;
+            case "amikacina":  cMin = 5;  cMax = 10; break;
+            case "meropenem":  cMin = 20; cMax = 50; break;
+            case "vancomicina": cMin = 5; cMax = 5; break;
+            default: cMin = 1; cMax = 1;
+        }
+
+        let vMin = (dosis / cMax).toFixed(2);
+        let vMax = (dosis / cMin).toFixed(2);
+        res.innerHTML = vMin === vMax ? `<b>${vMin} ml</b>` : `Entre <b>${vMin} ml</b> y <b>${vMax} ml</b>`;
+    }
+    </script>
+</body>
+</html>

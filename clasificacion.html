@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación Neonatal</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f0f4f8; }
+        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        select, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; }
+        .res { padding: 15px; margin-top: 15px; border-radius: 10px; display: none; background: #e3f2fd; color: #0d47a1; font-weight: bold; line-height: 1.6; }
+        .volver { display: block; text-align: center; margin-top: 20px; text-decoration: none; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📊 Clasificación</h2>
+        <label>Semanas de Gestación:</label>
+        <input type="number" id="sem" placeholder="Semanas (ej. 38)" oninput="clasificar()">
+        
+        <label>Peso al nacer (gramos):</label>
+        <input type="number" id="peso" placeholder="Gramos (ej. 3200)" oninput="clasificar()">
+
+        <div id="resultado" class="res"></div>
+        <a href="index.html" class="volver">← Volver</a>
+    </div>
+
+    <script>
+    function clasificar() {
+        const s = parseInt(document.getElementById('sem').value);
+        const p = parseInt(document.getElementById('peso').value);
+        const res = document.getElementById('resultado');
+
+        if (s && p) {
+            res.style.display = 'block';
+            let catEdad = s < 37 ? "Pretérmino" : (s < 42 ? "Término" : "Postérmino");
+            let catPeso = p < 2500 ? "Bajo Peso" : (p > 4000 ? "Macrosómico" : "Peso Adecuado");
+            res.innerHTML = `Edad: ${catEdad}<br>Peso: ${catPeso}`;
+        }
+    }
+    </script>
+</body>
+</html>

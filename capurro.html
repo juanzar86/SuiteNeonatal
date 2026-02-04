@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Capurro</title>
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; padding: 20px; }
+        .card { background: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; }
+        select { width: 100%; padding: 10px; margin: 10px 0; background: #333; color: white; border: none; }
+        .btn { display: block; width: 100%; padding: 15px; background: #ffc107; color: black; text-align: center; border: none; border-radius: 5px; font-weight: bold; }
+        #res { margin-top: 20px; text-align: center; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>📋 Test de Capurro (A)</h2>
+    <label>Forma de la oreja:</label>
+    <select id="c1"><option value="0">0 - Plana</option><option value="8">8 - Borde superior incurvado</option><option value="16">16 - Todo el borde incurvado</option></select>
+    
+    <label>Tamaño glándula mamaria:</label>
+    <select id="c2"><option value="0">0 - No palpable</option><option value="5">5 - < 5mm</option><option value="10">10 - 5 a 10mm</option><option value="15">15 - > 10mm</option></select>
+    
+    <label>Formación del pezón:</label>
+    <select id="c3"><option value="0">0 - Apenas visible</option><option value="5">5 - Diámetro < 7.5mm</option><option value="10">10 - Diámetro > 7.5mm, areola punteada</option><option value="15">15 - Areola levantada</option></select>
+    
+    <label>Textura de la piel:</label>
+    <select id="c4"><option value="0">0 - Muy fina/gelatinosa</option><option value="5">5 - Fina/lisa</option><option value="10">10 - Gruesa/grietas superficiales</option><option value="15">15 - Grietas profundas</option></select>
+    
+    <label>Pliegues plantares:</label>
+    <select id="c5"><option value="0">0 - Sin pliegues</option><option value="5">5 - Mal definidos</option><option value="10">10 - Surcos en mitad anterior</option><option value="15">15 - Surcos en más de la mitad anterior</option><option value="20">20 - Surcos en toda la planta</option></select>
+
+    <button class="btn" onclick="calcC()">Calcular Edad Gestacional</button>
+    <div id="res"></div>
+    <a href="index.html" style="color: #bbb; display: block; text-align: center; margin-top: 15px; text-decoration: none;">← Volver</a>
+</div>
+<script>
+function calcC() {
+    let puntos = parseInt(document.getElementById('c1').value) + parseInt(document.getElementById('c2').value) + 
+                 parseInt(document.getElementById('c3').value) + parseInt(document.getElementById('c4').value) + 
+                 parseInt(document.getElementById('c5').value);
+    let dias = 204 + puntos;
+    let semanas = (dias / 7).toFixed(1);
+    document.getElementById('res').innerHTML = "Días: " + dias + "<br>Semanas: " + semanas;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAE Neonatal</title>
+    <style>
+        body { font-family: sans-serif; padding: 15px; background: #f0f4f8; }
+        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        h2 { color: #2e7d32; text-align: center; }
+        select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; }
+        .pae-box { margin-top: 20px; padding: 15px; border-radius: 12px; background: #f1f8f1; border-left: 5px solid #2e7d32; display: none; }
+        b { color: #1b5e20; font-size: 0.9em; display: block; margin-top: 10px; }
+        p { font-size: 0.85em; margin: 5px 0; line-height: 1.4; color: #333; }
+        .volver { display: block; text-align: center; margin-top: 20px; text-decoration: none; color: #666; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📋 Plan de Cuidados</h2>
+        <label>Diagnóstico NANDA:</label>
+        <select id="diag" onchange="mostrar()">
+            <option value="">-- Seleccionar --</option>
+            <option value="ictericia">Ictericia Neonatal</option>
+            <option value="termo">Termorregulación Ineficaz</option>
+            <option value="inf">Riesgo de Infección</option>
+            <option value="resp">Patrón Respiratorio Ineficaz</option>
+        </select>
+        <div id="res" class="pae-box">
+            <b>NOC (Resultados):</b>
+            <p id="noc"></p>
+            <b>NIC (Intervenciones):</b>
+            <p id="nic"></p>
+        </div>
+        <a href="index.html" class="volver">← Volver</a>
+    </div>
+    <script>
+    const datos = {
+        ictericia: {
+            noc: "Adaptación del recién nacido. Bilirrubina controlada.",
+            nic: "Fototerapia neonatal. Monitorización de la piel. Hidratación adecuada."
+        },
+        termo: {
+            noc: "Termorregulación del recién nacido. Signos vitales estables.",
+            nic: "Regulación de la temperatura. Uso de incubadora/cuna radiante. Monitorización térmica."
+        },
+        inf: {
+            noc: "Integridad tisular. Control del riesgo de infección.",
+            nic: "Cuidado del cordón umbilical. Técnica aséptica. Lavado de manos estricto."
+        },
+        resp: {
+            noc: "Estado respiratorio: ventilación. Saturación de O2 normal.",
+            nic: "Monitorización respiratoria. Oxigenoterapia. Manejo de vías aéreas."
+        }
+    };
+    function mostrar() {
+        const sel = document.getElementById('diag').value;
+        const box = document.getElementById('res');
+        if (sel) {
+            box.style.display = 'block';
+            document.getElementById('noc').innerText = datos[sel].noc;
+            document.getElementById('nic').innerText = datos[sel].nic;
+        } else { box.style.display = 'none'; }
+    }
+    </script>
+</body>
+</html>
+
