@@ -3,34 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía de Diluciones Neonatales - SISTEMA COMPLETO</title>
+    <title>Guía de Diluciones Neonatales</title>
     <style>
         :root { --primary: #006064; --bg: #f4f7f6; --accent: #c62828; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; }
         .container { max-width: 1100px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .nav-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
-        .btn-volver { text-decoration: none; color: var(--primary); font-weight: bold; border: 2px solid var(--primary); padding: 8px 15px; border-radius: 8px; font-size: 0.9rem; }
+        .btn-volver { text-decoration: none; color: var(--primary); font-weight: bold; border: 2px solid var(--primary); padding: 8px 15px; border-radius: 8px; font-size: 0.8rem; }
         .search-area { background: #e0f2f1; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
-        input { padding: 12px; border: 1px solid #ccc; border-radius: 6px; width: 100%; box-sizing: border-box; font-size: 1rem; }
+        input { padding: 12px; border: 1px solid #ccc; border-radius: 6px; width: 100%; box-sizing: border-box; }
         table { width: 100%; border-collapse: collapse; }
         th { background: var(--primary); color: white; padding: 12px; font-size: 0.8rem; text-align: left; position: sticky; top: 0; }
         td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.85rem; vertical-align: top; }
-        tr:nth-child(even) { background: #f9f9f9; }
-        .calc-box { background: #fff3e0; padding: 10px; border-radius: 6px; color: #e65100; font-weight: bold; margin-top: 8px; font-size: 0.95rem; border-left: 5px solid #ff9800; animation: fadeIn 0.3s; }
-        .vel-tag { color: var(--accent); font-weight: bold; display: block; margin-top: 4px; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .calc-box { background: #fff3e0; padding: 10px; border-radius: 6px; color: #e65100; font-weight: bold; margin-top: 8px; border-left: 5px solid #ff9800; }
+        .vel { color: var(--accent); font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="nav-header">
-        <h2 style="color:var(--primary); margin:0;">Guía de Diluciones (Tabla Completa)</h2>
-        <a href="index.html" class="btn-volver">⬅ MENÚ PRINCIPAL</a>
+        <h2 style="color:var(--primary); margin:0;">Guía de Diluciones (46 Fármacos)</h2>
+        <a href="index.html" class="btn-volver">⬅ VOLVER</a>
     </div>
 
     <div class="search-area">
-        <input type="text" id="buscado" onkeyup="render()" placeholder="🔍 Buscar medicamento...">
+        <input type="text" id="buscado" onkeyup="render()" placeholder="🔍 Buscar fármaco...">
         <input type="number" id="mgDosis" onkeyup="render()" placeholder="Dosis en mg">
     </div>
 
@@ -38,7 +36,7 @@
         <thead>
             <tr>
                 <th>MEDICAMENTO</th>
-                <th>DILUYENTE Y VELOCIDAD</th>
+                <th>DILUYENTE / VELOCIDAD</th>
                 <th>ESTABILIDAD</th>
             </tr>
         </thead>
@@ -47,55 +45,54 @@
 </div>
 
 <script>
-// BASE DE DATOS ÍNTEGRA - 46 FÁRMACOS
 const db = [
-    {n:"ACICLOVIR", cMin:5, cMax:10, dil:"DX5% - SF", vel:"60 MINUTOS", est:"5 DÍAS (T. AMBIENTE)"},
-    {n:"ALBÚMINA", cMin:250, cMax:250, dil:"DIRECTO / DX5% - SF", vel:"30-60 MINUTOS", est:"72 HORAS (2-8°C)"},
-    {n:"AMIKACINA", cMin:5, cMax:10, dil:"DX5% - SF", vel:"30 MINUTOS", est:"7 DÍAS (T. AMBIENTE)"},
-    {n:"AMPICILINA", cMin:30, cMax:100, dil:"ABD - SF", vel:"30 MINUTOS", est:"24 HORAS (2-8°C)"},
-    {n:"AMPICILINA + SULBACTAM", cMin:3, cMax:30, dil:"SF", vel:"30 MINUTOS", est:"72 HORAS (2-8°C)"},
+    {n:"ACICLOVIR", cMin:5, cMax:10, dil:"DX5% - SF", vel:"60 MIN", est:"5 DÍAS (TA)"},
+    {n:"ALBÚMINA", cMin:250, cMax:250, dil:"DIR - DX5% - SF", vel:"30-60 MIN", est:"72H (2-8°C)"},
+    {n:"AMIKACINA", cMin:5, cMax:10, dil:"DX5% - SF", vel:"30 MIN", est:"7 DÍAS (TA)"},
+    {n:"AMPICILINA", cMin:30, cMax:100, dil:"ABD - SF", vel:"30 MIN", est:"24H (2-8°C)"},
+    {n:"AMPICILINA + SULBACTAM", cMin:3, cMax:30, dil:"SF", vel:"30 MIN", est:"72H (2-8°C)"},
     {n:"ANFOTERICINA B", cMin:0.1, cMax:0.5, dil:"DX5%", vel:"2-6 HORAS", est:"5 DÍAS (2-8°C)"},
-    {n:"BUPRENORFINA", cMin:0.3, cMax:0.3, dil:"SF", vel:"BOLO 3 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"CASPOFUNGINA", cMin:0.5, cMax:0.5, dil:"SF", vel:"60 MINUTOS", est:"24H (TA) / 48H (2-8°C)"},
-    {n:"CEFEPIME", cMin:40, cMax:100, dil:"DX5% - SF", vel:"30 MINUTOS", est:"7 DÍAS (2-8°C)"},
-    {n:"CEFOTAXIMA", cMin:20, cMax:100, dil:"DX5% - SF", vel:"30 MINUTOS", est:"7 DÍAS (2-8°C)"},
-    {n:"CEFTRIAXONA", cMin:10, cMax:40, dil:"DX5% - SF", vel:"30 MINUTOS", est:"3 DÍAS (T. AMBIENTE)"},
-    {n:"CEFTAZIDIMA", cMin:40, cMax:100, dil:"DX5% - SF", vel:"30 MINUTOS", est:"7 DÍAS (2-8°C)"},
-    {n:"CIPROFLOXACINO", cMin:1, cMax:2, dil:"SF - DX5%", vel:"60 MINUTOS", est:"14 DÍAS (2-8°C)"},
-    {n:"CLINDAMICINA", cMin:6, cMax:12, dil:"DX5% - SF", vel:"20-30 MINUTOS", est:"16 DÍAS (T. AMBIENTE)"},
-    {n:"DEXAMETASONA", cMin:2, cMax:4, dil:"SF - DX5%", vel:"10 MINUTOS", est:"7 DÍAS (T. AMBIENTE)"},
-    {n:"DORIPENEM", cMin:4, cMax:5, dil:"SF - DX5%", vel:"60 MINUTOS", est:"12H (TA) / 48H (2-8°C)"},
-    {n:"ERTAPENEM", cMin:20, cMax:20, dil:"SF", vel:"30 MINUTOS", est:"6H (TA) / 24H (2-8°C)"},
-    {n:"ERITROMICINA", cMin:1, cMax:5, dil:"SF - DX5%", vel:"60 MINUTOS", est:"24 HORAS (2-8°C)"},
-    {n:"ESMOLOL", cMin:10, cMax:10, dil:"SF - DX5%", vel:"LENTO", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"ETAMSILATO", cMin:50, cMax:50, dil:"SF - DX5%", vel:"10 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"FENITOÍNA", cMin:5, cMax:10, dil:"SF", vel:"20 MINUTOS", est:"NO REFRIGERAR"},
-    {n:"FENOBARBITAL", cMin:10, cMax:10, dil:"SF - DX5%", vel:"20 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"FENTANILO", cMin:0.01, cMax:0.05, dil:"SF - DX5%", vel:"LENTO / INFUSIÓN", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"FLUCONAZOL", cMin:2, cMax:2, dil:"DIRECTO", vel:"30 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"FUROSEMIDA", cMin:5, cMax:10, dil:"DIRECTO - SF", vel:"10-15 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"GENTAMICINA", cMin:2.5, cMax:10, dil:"SF - DX5%", vel:"30-60 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"HIDROCORTISONA", cMin:1, cMax:5, dil:"SF - DX5%", vel:"10-30 MINUTOS", est:"3 DÍAS (T. AMBIENTE)"},
-    {n:"IMIPENEM", cMin:5, cMax:5, dil:"SF - DX5%", vel:"30-60 MINUTOS", est:"4H (TA) / 24H (2-8°C)"},
-    {n:"LINEZOLID", cMin:2, cMax:2, dil:"DIRECTO", vel:"30-120 MINUTOS", est:"7 DÍAS (T. AMBIENTE)"},
-    {n:"LEVE TIRACETAM", cMin:10, cMax:15, dil:"SF - DX5%", vel:"15 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"MEROPENEM", cMin:20, cMax:50, dil:"SF - DX5%", vel:"30 MINUTOS", est:"2H (TA) / 12H (2-8°C)"},
-    {n:"METILPREDNISOLONA", cMin:1, cMax:5, dil:"SF - DX5%", vel:"10-30 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"METRONIDAZOL", cMin:5, cMax:5, dil:"DIRECTO", vel:"30-60 MINUTOS", est:"NO REFRIGERAR"},
-    {n:"MIDAZOLAM", cMin:0.5, cMax:1, dil:"SF - DX5%", vel:"LENTO", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"MILRINONA", cMin:0.2, cMax:0.2, dil:"SF - DX5%", vel:"INFUSIÓN", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"MORFINA", cMin:0.1, cMax:0.5, dil:"SF - DX5%", vel:"LENTO", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"NALOXONA", cMin:0.04, cMax:0.4, dil:"SF - DX5%", vel:"10 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"OMEPRAZOL", cMin:4, cMax:4, dil:"SF - DX5%", vel:"10-30 MINUTOS", est:"12 HORAS (T. AMBIENTE)"},
-    {n:"ONDANSETRÓN", cMin:2, cMax:2, dil:"SF - DX5%", vel:"15 MINUTOS", est:"7 DÍAS (T. AMBIENTE)"},
-    {n:"OXACILINA", cMin:20, cMax:40, dil:"SF - DX5%", vel:"30 MINUTOS", est:"4 DÍAS (2-8°C)"},
-    {n:"PENICILINA G", cMin:50000, cMax:100000, dil:"SF - DX5%", vel:"30 MINUTOS", est:"7 DÍAS (2-8°C)"},
-    {n:"PIPERACILINA/TAZO", cMin:20, cMax:100, dil:"SF - DX5%", vel:"30 MINUTOS", est:"48H (TA) / 7 DÍAS (R)"},
-    {n:"SULFATO DE MAGNESIO", cMin:1, cMax:10, dil:"SF - DX5%", vel:"LENTO", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"TIGECICLINA", cMin:0.5, cMax:1, dil:"SF - DX5%", vel:"30-60 MINUTOS", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"VANCOMICINA", cMin:5, cMax:5, dil:"SF - DX5% - RL", vel:"120 MINUTOS", est:"4 DÍAS (2-8°C)"},
-    {n:"VECURONIO", cMin:1, cMax:2, dil:"SF - DX5%", vel:"BOLO", est:"24 HORAS (T. AMBIENTE)"},
-    {n:"ZIDOVUDINA", cMin:2, cMax:4, dil:"DX5%", vel:"60 MINUTOS", est:"24 HORAS (T. AMBIENTE)"}
+    {n:"BUPRENORFINA", cMin:0.3, cMax:0.3, dil:"SF", vel:"BOLO 3 MIN", est:"24H (TA)"},
+    {n:"CASPOFUNGINA", cMin:0.5, cMax:0.5, dil:"SF", vel:"60 MIN", est:"24H (TA) / 48H (2-8°C)"},
+    {n:"CEFEPIME", cMin:40, cMax:100, dil:"DX5% - SF", vel:"30 MIN", est:"7 DÍAS (2-8°C)"},
+    {n:"CEFOTAXIMA", cMin:20, cMax:100, dil:"DX5% - SF", vel:"30 MIN", est:"7 DÍAS (2-8°C)"},
+    {n:"CEFTRIAXONA", cMin:10, cMax:40, dil:"DX5% - SF", vel:"30 MIN", est:"3 DÍAS (TA)"},
+    {n:"CEFTAZIDIMA", cMin:40, cMax:100, dil:"DX5% - SF", vel:"30 MIN", est:"7 DÍAS (2-8°C)"},
+    {n:"CIPROFLOXACINO", cMin:1, cMax:2, dil:"SF - DX5%", vel:"60 MIN", est:"14 DÍAS (2-8°C)"},
+    {n:"CLINDAMICINA", cMin:6, cMax:12, dil:"DX5% - SF", vel:"20-30 MIN", est:"16 DÍAS (TA)"},
+    {n:"DEXAMETASONA", cMin:2, cMax:4, dil:"SF - DX5%", vel:"10 MIN", est:"7 DÍAS (TA)"},
+    {n:"DORIPENEM", cMin:4, cMax:5, dil:"SF - DX5%", vel:"60 MIN", est:"12H (TA) / 48H (2-8°C)"},
+    {n:"ERTAPENEM", cMin:20, cMax:20, dil:"SF", vel:"30 MIN", est:"6H (TA) / 24H (2-8°C)"},
+    {n:"ERITROMICINA", cMin:1, cMax:5, dil:"SF - DX5%", vel:"60 MIN", est:"24H (2-8°C)"},
+    {n:"ESMOLOL", cMin:10, cMax:10, dil:"SF - DX5%", vel:"LENTO", est:"24H (TA)"},
+    {n:"ETAMSILATO", cMin:50, cMax:50, dil:"SF - DX5%", vel:"10 MIN", est:"24H (TA)"},
+    {n:"FENITOÍNA", cMin:5, cMax:10, dil:"SF", vel:"20 MIN", est:"NO REFRIGERAR"},
+    {n:"FENOBARBITAL", cMin:10, cMax:10, dil:"SF - DX5%", vel:"20 MIN", est:"24H (TA)"},
+    {n:"FENTANILO", cMin:0.01, cMax:0.05, dil:"SF - DX5%", vel:"LENTO", est:"24H (TA)"},
+    {n:"FLUCONAZOL", cMin:2, cMax:2, dil:"DIRECTO", vel:"30 MIN", est:"24H (TA)"},
+    {n:"FUROSEMIDA", cMin:5, cMax:10, dil:"DIR - SF", vel:"10-15 MIN", est:"24H (TA)"},
+    {n:"GENTAMICINA", cMin:2.5, cMax:10, dil:"SF - DX5%", vel:"30-60 MIN", est:"24H (TA)"},
+    {n:"HIDROCORTISONA", cMin:1, cMax:5, dil:"SF - DX5%", vel:"10-30 MIN", est:"3 DÍAS (TA)"},
+    {n:"IMIPENEM", cMin:5, cMax:5, dil:"SF - DX5%", vel:"30-60 MIN", est:"4H (TA) / 24H (2-8°C)"},
+    {n:"LINEZOLID", cMin:2, cMax:2, dil:"DIRECTO", vel:"30-120 MIN", est:"7 DÍAS (TA)"},
+    {n:"LEVETIRACETAM", cMin:10, cMax:15, dil:"SF - DX5%", vel:"15 MIN", est:"24H (TA)"},
+    {n:"MEROPENEM", cMin:20, cMax:50, dil:"SF - DX5%", vel:"30 MIN", est:"2H (TA) / 12H (2-8°C)"},
+    {n:"METILPREDNISOLONA", cMin:1, cMax:5, dil:"SF - DX5%", vel:"10-30 MIN", est:"24H (TA)"},
+    {n:"METRONIDAZOL", cMin:5, cMax:5, dil:"DIRECTO", vel:"30-60 MIN", est:"NO REFRIGERAR"},
+    {n:"MIDAZOLAM", cMin:0.5, cMax:1, dil:"SF - DX5%", vel:"LENTO", est:"24H (TA)"},
+    {n:"MILRINONA", cMin:0.2, cMax:0.2, dil:"SF - DX5%", vel:"INFUSIÓN", est:"24H (TA)"},
+    {n:"MORFINA", cMin:0.1, cMax:0.5, dil:"SF - DX5%", vel:"LENTO", est:"24H (TA)"},
+    {n:"NALOXONA", cMin:0.04, cMax:0.4, dil:"SF - DX5%", vel:"10 MIN", est:"24H (TA)"},
+    {n:"OMEPRAZOL", cMin:4, cMax:4, dil:"SF - DX5%", vel:"10-30 MIN", est:"12H (TA)"},
+    {n:"ONDANSETRÓN", cMin:2, cMax:2, dil:"SF - DX5%", vel:"15 MIN", est:"7 DÍAS (TA)"},
+    {n:"OXACILINA", cMin:20, cMax:40, dil:"SF - DX5%", vel:"30 MIN", est:"4 DÍAS (2-8°C)"},
+    {n:"PENICILINA G", cMin:50000, cMax:100000, dil:"SF - DX5%", vel:"30 MIN", est:"7 DÍAS (2-8°C)"},
+    {n:"PIPERACILINA/TAZO", cMin:20, cMax:100, dil:"SF - DX5%", vel:"30 MIN", est:"48H (TA) / 7 DÍAS (R)"},
+    {n:"SULFATO DE MAGNESIO", cMin:1, cMax:10, dil:"SF - DX5%", vel:"LENTO", est:"24H (TA)"},
+    {n:"TIGECICLINA", cMin:0.5, cMax:1, dil:"SF - DX5%", vel:"30-60 MIN", est:"24H (TA)"},
+    {n:"VANCOMICINA", cMin:5, cMax:5, dil:"SF - DX5% - RL", vel:"120 MIN", est:"4 DÍAS (2-8°C)"},
+    {n:"VECURONIO", cMin:1, cMax:2, dil:"SF - DX5%", vel:"BOLO", est:"24H (TA)"},
+    {n:"ZIDOVUDINA", cMin:2, cMax:4, dil:"DX5%", vel:"60 MIN", est:"24H (TA)"}
 ];
 
 function render() {
@@ -103,23 +100,15 @@ function render() {
     const mg = parseFloat(document.getElementById("mgDosis").value);
     const tbody = document.getElementById("cuerpoTabla");
     tbody.innerHTML = "";
-
-    const filtrados = db.filter(f => f.n.includes(q));
-
-    filtrados.forEach(f => {
+    db.filter(f => f.n.includes(q)).forEach(f => {
         let calc = "";
         if (mg > 0) {
             let vMax = (mg / f.cMin).toFixed(2);
             let vMin = (mg / f.cMax).toFixed(2);
-            let textoVol = (vMin === vMax) ? `${vMin} ml` : `entre ${vMin} y ${vMax} ml`;
-            calc = `<div class="calc-box">💉 VOLUMEN FINAL: Diluir los ${mg} mg en un total de ${textoVol}.</div>`;
+            let res = (vMin === vMax) ? `${vMin} ml` : `${vMin} a ${vMax} ml`;
+            calc = `<div class="calc-box">Volumen total: ${res}</div>`;
         }
-        tbody.innerHTML += `
-            <tr>
-                <td><b style="color:var(--primary); font-size:1rem;">${f.n}</b>${calc}</td>
-                <td>${f.dil}<br><span class="vel-tag">⏱ ${f.vel}</span></td>
-                <td>${f.est}</td>
-            </tr>`;
+        tbody.innerHTML += `<tr><td><b>${f.n}</b>${calc}</td><td>${f.dil}<br><span class="vel">Vel: ${f.vel}</span></td><td>${f.est}</td></tr>`;
     });
 }
 render();
