@@ -3,115 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de Dispositivos - Suite Neonatal</title>
-    <style>
-        :root {
-            --azul-UCIN: #2c5d8f;
-            --bg-azul: #f0f7ff;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f7f9;
-            margin: 0; padding: 15px;
-            display: flex; justify-content: center;
-        }
-        .container {
-            background-color: white;
-            width: 100%; max-width: 400px;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .header { display: flex; align-items: center; margin-bottom: 20px; }
-        .btn-back { text-decoration: none; font-size: 20px; color: var(--azul-UCIN); margin-right: 15px; }
-        h2 { color: var(--azul-UCIN); font-size: 1.1rem; margin: 0; }
-        
-        .device-card {
-            background-color: var(--bg-azul);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #d1e3f8;
-        }
-        .device-header {
-            display: flex; justify-content: space-between;
-            font-weight: bold; color: var(--azul-UCIN);
-            margin-bottom: 10px; font-size: 14px;
-        }
-        label { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
-        input, select {
-            width: 100%; padding: 8px; border: 1px solid #ccc;
-            border-radius: 8px; font-size: 13px; box-sizing: border-box;
-        }
-        .warning {
-            color: #b33a3a; font-size: 11px; font-weight: bold;
-            margin-top: 5px; display: none;
-        }
-        .btn-save {
-            background-color: var(--azul-UCIN); color: white; border: none;
-            width: 100%; padding: 15px; border-radius: 10px;
-            font-weight: bold; margin-top: 10px; cursor: pointer;
-        }
-    </style>
+    <title>Protocolo MARSI - Suite Neonatal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-50 p-4 min-h-screen">
 
-<div class="container">
-    <div class="header">
-        <a href="index.html" class="btn-back">←</a>
-        <h2>Control de Dispositivos</h2>
+    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-xl p-6 border-t-8 border-indigo-600">
+        <header class="text-center mb-6">
+            <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Protocolo MARSI</h1>
+            <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest text-center">Lesiones por Adhesivos Médicos</p>
+        </header>
+
+        <div class="space-y-4">
+            <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 shadow-sm">
+                <h2 class="text-xs font-black text-indigo-800 uppercase mb-3 flex items-center gap-2">
+                    🛡️ Medidas de Prevención
+                </h2>
+                <ul class="text-xs text-slate-700 space-y-3 font-medium">
+                    <li class="flex items-start gap-2">🔹 Utilizar barreras cutáneas sin alcohol (película protectora).</li>
+                    <li class="flex items-start gap-2">🔹 Priorizar el uso de adhesivos de silicona médica.</li>
+                    <li class="flex items-start gap-2">🔹 Retirar el adhesivo lentamente, a ras de piel y en un ángulo de 180°.</li>
+                    <li class="flex items-start gap-2">🔹 Evitar la tensión excesiva al aplicar apósitos o cintas.</li>
+                </ul>
+            </div>
+
+            <div class="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm">
+                <h2 class="text-xs font-black text-slate-400 uppercase mb-3 text-center tracking-widest">Signos de Lesión</h2>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="p-2 bg-rose-50 rounded-lg text-[11px] font-bold text-rose-700 text-center">Eritema persistente (>30 min)</div>
+                    <div class="p-2 bg-rose-50 rounded-lg text-[11px] font-bold text-rose-700 text-center">Flictenas o Ampollas</div>
+                    <div class="p-2 bg-rose-50 rounded-lg text-[11px] font-bold text-rose-700 text-center">Desprendimiento Epidérmico</div>
+                    <div class="p-2 bg-rose-50 rounded-lg text-[11px] font-bold text-rose-700 text-center">Maceración de la piel</div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-800 rounded-2xl text-white shadow-lg text-center">
+                <p class="text-[10px] uppercase font-black opacity-70 mb-1">Regla de Oro:</p>
+                <p class="text-xs font-bold italic leading-tight">
+                    "Si la piel se desprende con el adhesivo, se considera un Evento Adverso. ¡Reportar de inmediato!"
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="index.html" class="text-slate-400 text-xs font-black uppercase tracking-widest hover:text-indigo-600 transition">
+                ← Volver al Menú
+            </a>
+        </div>
     </div>
-
-    <div class="device-card">
-        <div class="device-header"><span>⚓ Catéter Umbilical</span></div>
-        <label>Fecha de Instalación</label>
-        <input type="date" id="fecha-umb" onchange="checkAlerta('fecha-umb', 'alert-umb', 7)">
-        <div id="alert-umb" class="warning">⚠️ Sugerir retiro o cambio (Máx 7 días)</div>
-    </div>
-
-    <div class="device-card">
-        <div class="device-header"><span>💉 Acceso Periférico</span></div>
-        <label>Sitio de punción</label>
-        <select>
-            <option>Mano Derecha</option>
-            <option>Mano Izquierda</option>
-            <option>Pie Derecho</option>
-            <option>Pie Izquierdo</option>
-            <option>Piel Cabelluda</option>
-        </select>
-        <label style="margin-top:8px">Días de permanencia</label>
-        <input type="number" placeholder="Ej. 2">
-    </div>
-
-    <div class="device-card">
-        <div class="device-header"><span>🍼 Sonda Oro/Nasogástrica</span></div>
-        <label>Tipo de Sonda</label>
-        <select>
-            <option>Orogástrica (OG)</option>
-            <option>Nasogástrica (NG)</option>
-        </select>
-        <label style="margin-top:8px">Fr (Calibre)</label>
-        <input type="number" placeholder="Ej. 5">
-    </div>
-
-    <button class="btn-save" onclick="alert('Control actualizado')">Actualizar Bitácora</button>
-</div>
-
-<script>
-    function checkAlerta(inputId, alertId, maxDias) {
-        const fechaIn = new Date(document.getElementById(inputId).value);
-        const hoy = new Date();
-        const diffTime = Math.abs(hoy - fechaIn);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        
-        const alerta = document.getElementById(alertId);
-        if (diffDays >= maxDias) {
-            alerta.style.display = "block";
-        } else {
-            alerta.style.display = "none";
-        }
-    }
-</script>
 
 </body>
 </html>
