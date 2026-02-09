@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoja de Enfermería Pro - Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 p-2 sm:p-4 min-h-screen">
+
+    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
+        <div class="bg-blue-900 p-6 text-white text-center">
+            <h1 class="text-xl font-black uppercase tracking-tighter">Hoja de Enfermería Neonatal</h1>
+            <div class="flex justify-center gap-4 mt-2 text-[9px] font-bold opacity-80 uppercase">
+                <span>Fecha: <span id="fecha"></span></span>
+            </div>
+        </div>
+
+        <div class="p-5 space-y-6">
+            <div class="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <div class="col-span-2">
+                    <label class="text-[9px] font-black text-slate-400 uppercase">Nombre del Neonato</label>
+                    <input type="text" placeholder="RN Apellido" class="w-full bg-transparent font-bold text-sm outline-none border-b border-slate-200">
+                </div>
+                <div>
+                    <label class="text-[9px] font-black text-slate-400 uppercase">Peso (g)</label>
+                    <input type="number" placeholder="0000" class="w-full bg-transparent font-bold text-sm outline-none border-b border-slate-200">
+                </div>
+                <div>
+                    <label class="text-[9px] font-black text-slate-400 uppercase">Semanas (SEG)</label>
+                    <input type="number" placeholder="00" class="w-full bg-transparent font-bold text-sm outline-none border-b border-slate-200">
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <h2 class="text-xs font-black text-blue-900 uppercase tracking-widest flex items-center gap-2">
+                    💧 Balance Hídrico
+                </h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-100">
+                        <label class="text-[9px] font-black text-emerald-600 uppercase block">Ingresos (ml)</label>
+                        <input type="number" id="ing" class="w-full bg-transparent font-bold text-lg outline-none" oninput="calcBalance()">
+                    </div>
+                    <div class="bg-rose-50 p-3 rounded-2xl border border-rose-100">
+                        <label class="text-[9px] font-black text-rose-600 uppercase block">Egresos (ml)</label>
+                        <input type="number" id="egr" class="w-full bg-transparent font-bold text-lg outline-none" oninput="calcBalance()">
+                    </div>
+                </div>
+                <div id="balance-res" class="p-3 rounded-xl bg-slate-800 text-white text-center text-xs font-bold hidden"></div>
+            </div>
+
+            <div class="space-y-3">
+                <h2 class="text-xs font-black text-blue-900 uppercase tracking-widest">📋 Valoración Rápida</h2>
+                <div class="space-y-2">
+                    <select class="w-full p-3 bg-slate-50 rounded-xl border-none text-xs font-bold uppercase outline-none shadow-sm">
+                        <option>Neurológico: Sin alteraciones</option>
+                        <option>Neurológico: Hipoactivo / Hipotónico</option>
+                        <option>Neurológico: Irritable / Convulsivo</option>
+                    </select>
+                    <select class="w-full p-3 bg-slate-50 rounded-xl border-none text-xs font-bold uppercase outline-none shadow-sm">
+                        <option>Ventilatorio: Sin dificultad</option>
+                        <option>Ventilatorio: Apoyos O2 / VMNI</option>
+                        <option>Ventilatorio: TET / Secreciones</option>
+                    </select>
+                    <select class="w-full p-3 bg-slate-50 rounded-xl border-none text-xs font-bold uppercase outline-none shadow-sm">
+                        <option>Abdomen: Blando / Ruidos +</option>
+                        <option>Abdomen: Distendido / Residuo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[9px] font-black text-slate-400 uppercase">Observaciones del Turno</label>
+                <textarea rows="3" class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-xs font-medium outline-none focus:ring-2 focus:ring-blue-200" placeholder="Novedades relevantes..."></textarea>
+            </div>
+
+            <button onclick="window.print()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-xs uppercase shadow-xl active:scale-95 transition">
+                🖨️ Generar PDF / Imprimir
+            </button>
+        </div>
+
+        <div class="p-6 bg-slate-50 text-center border-t border-slate-100">
+            <a href="index.html" class="text-slate-400 text-[10px] font-black uppercase tracking-widest hover:text-blue-600">← Panel Principal</a>
+        </div>
+    </div>
+
+    <script>
+        // Pone la fecha automática
+        document.getElementById('fecha').innerText = new Date().toLocaleDateString();
+        
+        // Calcula el balance al momento
+        function calcBalance() {
+            const ing = parseFloat(document.getElementById('ing').value) || 0;
+            const egr = parseFloat(document.getElementById('egr').value) || 0;
+            const res = document.getElementById('balance-res');
+            if(ing > 0 || egr > 0) {
+                res.classList.remove('hidden');
+                res.innerText = "BALANCE TOTAL: " + (ing - egr).toFixed(1) + " ml";
+            } else {
+                res.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
