@@ -3,115 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de Dispositivos - Suite Neonatal</title>
-    <style>
-        :root {
-            --azul-UCIN: #2c5d8f;
-            --bg-azul: #f0f7ff;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f7f9;
-            margin: 0; padding: 15px;
-            display: flex; justify-content: center;
-        }
-        .container {
-            background-color: white;
-            width: 100%; max-width: 400px;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .header { display: flex; align-items: center; margin-bottom: 20px; }
-        .btn-back { text-decoration: none; font-size: 20px; color: var(--azul-UCIN); margin-right: 15px; }
-        h2 { color: var(--azul-UCIN); font-size: 1.1rem; margin: 0; }
-        
-        .device-card {
-            background-color: var(--bg-azul);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #d1e3f8;
-        }
-        .device-header {
-            display: flex; justify-content: space-between;
-            font-weight: bold; color: var(--azul-UCIN);
-            margin-bottom: 10px; font-size: 14px;
-        }
-        label { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
-        input, select {
-            width: 100%; padding: 8px; border: 1px solid #ccc;
-            border-radius: 8px; font-size: 13px; box-sizing: border-box;
-        }
-        .warning {
-            color: #b33a3a; font-size: 11px; font-weight: bold;
-            margin-top: 5px; display: none;
-        }
-        .btn-save {
-            background-color: var(--azul-UCIN); color: white; border: none;
-            width: 100%; padding: 15px; border-radius: 10px;
-            font-weight: bold; margin-top: 10px; cursor: pointer;
-        }
-    </style>
+    <title>Riesgo UPP - Suite Neonatal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-50 p-4 min-h-screen">
 
-<div class="container">
-    <div class="header">
-        <a href="index.html" class="btn-back">←</a>
-        <h2>Control de Dispositivos</h2>
+    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-xl p-6 border-t-8 border-teal-500">
+        <header class="text-center mb-6">
+            <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Prevención UPP</h1>
+            <p class="text-[10px] font-bold text-teal-600 uppercase tracking-widest text-center">Escala NSRAS Neonatal</p>
+        </header>
+
+        <div class="space-y-4">
+            <div class="bg-teal-50 p-5 rounded-2xl border border-teal-100">
+                <label class="block text-[10px] font-black text-teal-800 uppercase mb-2 text-center">Puntaje Obtenido (6 a 24)</label>
+                <input type="number" id="score_upp" min="6" max="24" oninput="calcularUPP()" placeholder="Ej: 14" 
+                class="w-full p-3 rounded-xl border-none focus:ring-2 focus:ring-teal-400 font-bold text-lg text-center shadow-sm outline-none">
+            </div>
+
+            <div id="res_upp" class="hidden space-y-4">
+                <div id="box_alerta" class="p-4 rounded-2xl text-center shadow-sm border">
+                    <p id="nivel_riesgo" class="font-black text-xl uppercase tracking-tighter"></p>
+                </div>
+
+                <div class="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm">
+                    <p class="text-[10px] font-black text-slate-400 uppercase mb-3 text-center tracking-widest italic">Cuidados de Enfermería</p>
+                    <ul class="text-xs text-slate-700 space-y-3 font-medium">
+                        <li class="flex items-start gap-2">🔹 Cambios posturales programados cada 2h-4h.</li>
+                        <li class="flex items-start gap-2">🔹 Protección de prominencias óseas con ácidos grasos hiperoxigenados.</li>
+                        <li class="flex items-start gap-2">🔹 Vigilar humedad (pañal) y puntos de presión por dispositivos.</li>
+                        <li class="flex items-start gap-2">🔹 Valoración diaria de la integridad cutánea.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="index.html" class="text-slate-400 text-xs font-black uppercase tracking-widest hover:text-teal-600 transition">
+                ← Volver al Menú
+            </a>
+        </div>
     </div>
 
-    <div class="device-card">
-        <div class="device-header"><span>⚓ Catéter Umbilical</span></div>
-        <label>Fecha de Instalación</label>
-        <input type="date" id="fecha-umb" onchange="checkAlerta('fecha-umb', 'alert-umb', 7)">
-        <div id="alert-umb" class="warning">⚠️ Sugerir retiro o cambio (Máx 7 días)</div>
-    </div>
+    <script>
+        function calcularUPP() {
+            const score = parseInt(document.getElementById('score_upp').value);
+            const res = document.getElementById('res_upp');
+            const box = document.getElementById('box_alerta');
+            const msg = document.getElementById('nivel_riesgo');
 
-    <div class="device-card">
-        <div class="device-header"><span>💉 Acceso Periférico</span></div>
-        <label>Sitio de punción</label>
-        <select>
-            <option>Mano Derecha</option>
-            <option>Mano Izquierda</option>
-            <option>Pie Derecho</option>
-            <option>Pie Izquierdo</option>
-            <option>Piel Cabelluda</option>
-        </select>
-        <label style="margin-top:8px">Días de permanencia</label>
-        <input type="number" placeholder="Ej. 2">
-    </div>
+            if (!score || score < 6) {
+                res.classList.add('hidden');
+                return;
+            }
 
-    <div class="device-card">
-        <div class="device-header"><span>🍼 Sonda Oro/Nasogástrica</span></div>
-        <label>Tipo de Sonda</label>
-        <select>
-            <option>Orogástrica (OG)</option>
-            <option>Nasogástrica (NG)</option>
-        </select>
-        <label style="margin-top:8px">Fr (Calibre)</label>
-        <input type="number" placeholder="Ej. 5">
-    </div>
+            res.classList.remove('hidden');
 
-    <button class="btn-save" onclick="alert('Control actualizado')">Actualizar Bitácora</button>
-</div>
-
-<script>
-    function checkAlerta(inputId, alertId, maxDias) {
-        const fechaIn = new Date(document.getElementById(inputId).value);
-        const hoy = new Date();
-        const diffTime = Math.abs(hoy - fechaIn);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        
-        const alerta = document.getElementById(alertId);
-        if (diffDays >= maxDias) {
-            alerta.style.display = "block";
-        } else {
-            alerta.style.display = "none";
+            // Lógica de Riesgo NSRAS (Neonatal Skin Risk Assessment Scale)
+            if (score >= 13) {
+                box.className = "p-4 rounded-2xl text-center bg-rose-50 border-rose-200 text-rose-600 shadow-inner animate-pulse";
+                msg.innerText = "🚨 Riesgo Alto";
+            } else if (score >= 9) {
+                box.className = "p-4 rounded-2xl text-center bg-amber-50 border-amber-200 text-amber-600 shadow-inner";
+                msg.innerText = "⚠️ Riesgo Moderado";
+            } else {
+                box.className = "p-4 rounded-2xl text-center bg-emerald-50 border-emerald-200 text-emerald-600 shadow-inner";
+                msg.innerText = "✅ Riesgo Bajo";
+            }
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
