@@ -3,176 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Guía Neonatal - Pink & Blue</title>
+    <title>Guía Neonatal - Baby Care</title>
     <style>
         :root {
-            --pink-main: #DB2777;
-            --pink-light: #FCE7F3;
-            --blue-main: #2563EB;
-            --blue-light: #DBEAFE;
-            --yellow-accent: #FEF08A;
-            --bg-creamy: #FFFDF5;
+            --pink-main: #e91e63;
+            --pink-bg: #fce4ec;
+            --yellow-btn: #fff176;
+            --blue-border: #e3f2fd;
         }
-
-        body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background-color: var(--bg-creamy); 
-            margin: 0; 
-            color: #334155;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Encabezado con Degradado Rosa */
+        body { font-family: sans-serif; background-color: #fffdf5; margin: 0; padding-bottom: 40px; }
+        
+        /* HEADER MEJORADO */
         header { 
-            background: linear-gradient(to bottom, #F472B6, #DB2777);
-            padding: 50px 20px 80px; 
-            border-radius: 0 0 4rem 4rem; 
-            text-align: center; 
-            position: relative;
-            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.2);
+            background-color: var(--pink-main); 
+            padding: 40px 20px 60px; 
+            border-radius: 0 0 40px 40px; 
+            text-align: center;
         }
-
-        /* Contenedor de la Imagen de los Bebés */
-        .baby-frame {
-            width: 130px;
-            height: 130px;
-            background: white;
-            border-radius: 30px;
+        .baby-box {
+            width: 140px; height: 140px;
+            background: white; border-radius: 30px;
             margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 6px solid white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        .baby-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        h1 { color: white; margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
-        .subtitle { color: #FCE7F3; font-size: 11px; font-weight: bold; letter-spacing: 3px; margin-top: 5px; text-transform: uppercase; }
-
-        main { max-width: 420px; margin: -40px auto 0; padding: 0 20px; }
-
-        /* Botones Superiores */
-        .top-nav { display: grid; grid-template-cols: 1.2fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .baby-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        .btn-top {
-            text-decoration: none;
-            padding: 18px 12px;
-            border-radius: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-weight: 800;
-            font-size: 13px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s;
-        }
-        .btn-top:active { transform: scale(0.95); }
+        h1 { color: white; margin: 0; font-size: 28px; font-weight: 900; letter-spacing: 1px; }
+        .tagline { color: #fce4ec; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-top: 5px; }
 
-        .bg-pink { background: var(--pink-main); color: white; }
-        .bg-yellow { background: var(--yellow-accent); color: #854D0E; }
-
-        /* Secciones */
-        .section-label { 
-            font-size: 13px; font-weight: 900; color: #BE185D; 
-            text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 0 15px 10px; 
-        }
-
-        /* Grid de Valoración (Azul) */
-        .grid-blue { display: grid; grid-template-cols: repeat(4, 1fr); gap: 10px; }
+        /* BOTONES PRINCIPALES */
+        main { max-width: 400px; margin: -30px auto 0; padding: 0 20px; }
         
-        .card-blue { 
-            text-decoration: none; background: white; border-radius: 1.2rem; 
-            padding: 15px 5px; text-align: center; border: 2px solid var(--blue-light);
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.05);
-        }
-        .card-blue span { display: block; color: var(--blue-main); font-weight: 800; font-size: 10px; margin-top: 5px; text-transform: uppercase; }
-
-        /* Grid de Seguridad (Borde Rosa) */
-        .grid-safety { display: grid; grid-template-cols: repeat(4, 1fr); gap: 8px; }
-        
-        .card-safety { 
-            text-decoration: none; background: white; border-radius: 1rem; 
-            padding: 12px 2px; text-align: center; border: 2px solid var(--pink-light);
-            color: var(--pink-main); font-weight: 800; font-size: 9px; text-transform: uppercase;
+        .btn-diluciones {
+            background-color: var(--yellow-btn);
+            padding: 18px; border-radius: 30px;
+            text-align: center; text-decoration: none;
+            display: block; color: #827717; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
 
-        /* Botones Finales */
-        .footer-btns { display: grid; grid-template-cols: 1fr 1fr; gap: 12px; margin-top: 20px; }
-        .btn-foot {
-            text-decoration: none; padding: 18px; border-radius: 1.5rem;
-            text-align: center; font-weight: 800; font-size: 12px; text-transform: uppercase;
-        }
+        .section-title { color: var(--pink-main); font-size: 14px; font-weight: 900; margin: 20px 0 15px 10px; }
 
-        footer { text-align: center; margin-top: 40px; padding-bottom: 30px; }
-        .version-badge { background: var(--pink-main); color: white; padding: 10px 25px; border-radius: 50px; font-size: 10px; font-weight: 900; }
+        /* GRID DE CARTAS */
+        .card-row { 
+            background: white; border: 2px solid var(--blue-border);
+            border-radius: 25px; padding: 20px; margin-bottom: 15px;
+            text-align: center; text-decoration: none; display: block;
+            transition: 0.2s;
+        }
+        .card-row:active { background-color: #f1f8ff; }
+        .card-icon { font-size: 30px; margin-bottom: 10px; display: block; }
+        .card-label { color: #1e88e5; font-weight: 900; font-size: 12px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="baby-frame">
+        <div class="baby-box">
             <img src="https://img.freepik.com/vector-premium/lindo-bebe-nino-nina-durmiendo-nube-ilustracion-vector-dibujos-animados_544438-513.jpg" alt="Bebés">
         </div>
         <h1>GUÍA NEONATAL</h1>
-        <div class="subtitle">NEWBORN BABY CARE</div>
+        <div class="tagline">NEWBORN BABY CARE</div>
     </header>
 
     <main>
-        <div class="top-nav">
-            <a href="hoja.html" class="btn-top bg-pink">
-                <span>📋</span> Hoja Enfermería
-            </a>
-            <a href="farmaco.html" class="btn-top bg-yellow">
-                Guía Diluciones 💊
-            </a>
-        </div>
+        <a href="farmaco.html" class="btn-diluciones">Guía Diluciones 💊</a>
 
-        <div class="section-label">Valoración Clínica</div>
-        <div class="grid-blue">
-            <a href="apgar.html" class="card-blue">
-                <img src="https://cdn-icons-png.flaticon.com/512/2312/2312532.png" width="24" alt="Apgar">
-                <span>Apgar</span>
-            </a>
-            <a href="silverman.html" class="card-blue">
-                <img src="https://cdn-icons-png.flaticon.com/512/2855/2855523.png" width="24" alt="Silverman">
-                <span>Silverman</span>
-            </a>
-            <a href="ballard.html" class="card-blue">
-                <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" width="24" alt="Ballard">
-                <span>Ballard</span>
-            </a>
-            <a href="capurro.html" class="card-blue">
-                <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" width="24" alt="Capurro">
-                <span>Capurro</span>
-            </a>
-        </div>
+        <div class="section-title">VALORACIÓN CLÍNICA</div>
 
-        <div class="section-label">Seguridad y Soporte</div>
-        <div class="grid-safety">
-            <a href="upp.html" class="card-safety">Riesgo UPP</a>
-            <a href="caida.html" class="card-safety">Caídas</a>
-            <a href="dispositivos.html" class="card-safety">Material</a>
-            <a href="marsi.html" class="card-safety">Marsi</a>
-        </div>
+        <a href="apgar.html" class="card-row">
+            <span class="card-icon">⭐</span>
+            <span class="card-label">APGAR</span>
+        </a>
 
-        <div class="footer-btns">
-            <a href="signos.html" class="btn-foot" style="background: #FBCFE8; color: #BE185D;">Signos Vitales</a>
-            <a href="laboratorio.html" class="btn-foot" style="background: #60A5FA; color: white;">Laboratorio</a>
-        </div>
+        <a href="silverman.html" class="card-row">
+            <span class="card-icon">🌬️</span>
+            <span class="card-label">SILVERMAN</span>
+        </a>
 
-        <footer>
-            <div class="version-badge">PINK & BLUE EDITION</div>
-        </footer>
+        <a href="ballard.html" class="card-row">
+            <span class="card-icon">📅</span>
+            <span class="card-label">BALLARD</span>
+        </a>
+
+        <a href="capurro.html" class="card-row">
+            <span class="card-icon">👶</span>
+            <span class="card-label">CAPURRO</span>
+        </a>
     </main>
 
 </body>
 </html>
-
