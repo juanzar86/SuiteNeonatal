@@ -5,92 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guía Neonatal</title>
     <style>
-        /* ESTILOS FIJOS PARA QUE NO SE ROMPA EL DISEÑO */
         body { font-family: sans-serif; background-color: #fffdf5; margin: 0; padding-bottom: 40px; }
-        
         header { 
-            background-color: #e91e63; /* Rosa fuerte */
+            background: linear-gradient(to bottom, #f06292, #e91e63); 
             padding: 40px 20px 60px; 
             border-radius: 0 0 40px 40px; 
             text-align: center;
         }
-
         .baby-frame {
-            width: 140px; height: 140px;
+            width: 120px; height: 120px;
             background: white; border-radius: 30px;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; border: 4px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 4px solid white;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
-        
-        /* Imagen estable de Freepik */
-        .baby-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        h1 { color: white; margin: 0; font-size: 28px; font-weight: 900; letter-spacing: 1px; }
+        .baby-frame img { width: 80%; height: 80%; object-fit: contain; }
+        h1 { color: white; margin: 0; font-size: 26px; font-weight: 900; letter-spacing: 1px; }
         .tagline { color: #fce4ec; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-top: 5px; }
-
         main { max-width: 400px; margin: -30px auto 0; padding: 0 20px; }
-        
-        /* Botón Amarillo de Diluciones */
         .btn-yellow {
-            background-color: #fff176;
-            padding: 18px; border-radius: 30px;
-            text-align: center; text-decoration: none;
-            display: block; color: #827717; font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            background-color: #fff176; padding: 18px; border-radius: 30px;
+            text-align: center; text-decoration: none; display: block; 
+            color: #827717; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
         }
-
-        .section-title { color: #e91e63; font-size: 14px; font-weight: 900; margin: 25px 0 15px 10px; }
-
-        /* Tarjetas de Valoración */
+        .section-title { color: #e91e63; font-size: 13px; font-weight: 900; margin: 20px 0 10px 10px; }
         .card { 
-            background: white; border: 2px solid #e3f2fd;
-            border-radius: 25px; padding: 20px; margin-bottom: 12px;
-            text-align: center; text-decoration: none; display: flex;
-            align-items: center; justify-content: center; gap: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            background: white; border: 2px solid #e3f2fd; border-radius: 20px; 
+            padding: 15px; margin-bottom: 10px; text-decoration: none; 
+            display: flex; align-items: center; gap: 15px;
         }
-        .card span { color: #1e88e5; font-weight: 900; font-size: 14px; letter-spacing: 1px; }
+        .card span { color: #1e88e5; font-weight: 800; font-size: 14px; }
         .icon { font-size: 24px; }
     </style>
 </head>
 <body>
-
     <header>
         <div class="baby-frame">
-            <img src="https://img.freepik.com/vector-premium/lindo-bebe-nino-nina-durmiendo-nube-ilustracion-vector-dibujos-animados_544438-513.jpg" alt="Bebés">
+            <img src="https://cdn-icons-png.flaticon.com/512/3209/3209121.png" alt="Icono Neonatal">
         </div>
         <h1>GUÍA NEONATAL</h1>
-        <div class="tagline">NEWBORN BABY CARE</div>
+        <div class="tagline">PROYECTO DE MAESTRÍA</div>
     </header>
-
     <main>
-        <a href="farmaco.html" class="btn-yellow">Guía Diluciones 💊</a>
-
+        <a href="farmaco.html" class="btn-yellow">GUÍA DE DILUCIONES 💊</a>
         <div class="section-title">VALORACIÓN CLÍNICA</div>
-
-        <a href="apgar.html" class="card">
-            <span class="icon">⭐</span>
-            <span>APGAR</span>
-        </a>
-
-        <a href="silverman.html" class="card">
-            <span class="icon">🌬️</span>
-            <span>SILVERMAN</span>
-        </a>
-
-        <a href="ballard.html" class="card">
-            <span class="icon">📅</span>
-            <span>BALLARD</span>
-        </a>
-
-        <a href="capurro.html" class="card">
-            <span class="icon">👶</span>
-            <span>CAPURRO</span>
-        </a>
+        <a href="apgar.html" class="card"><span class="icon">⭐</span><span>APGAR</span></a>
+        <a href="silverman.html" class="card"><span class="icon">🌬️</span><span>SILVERMAN</span></a>
+        <a href="ballard.html" class="card"><span class="icon">📅</span><span>BALLARD</span></a>
+        <a href="capurro.html" class="card"><span class="icon">👶</span><span>CAPURRO</span></a>
     </main>
-
 </body>
 </html>
