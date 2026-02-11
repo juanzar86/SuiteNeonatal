@@ -3,76 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sintonía Neonatal | Suite de Adaptación</title>
+    <title>Calculadora Neonatal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="container">
-    <header class="header">
-        <h1>Sintonía Neonatal</h1>
-        <p id="quote">"La observación indica cómo está el paciente; la reflexión indica qué hay que hacer." — F. Nightingale</p>
-    </header>
-
-    <section class="card">
-        <h2><span class="icon">🌬️</span> Dinámica Vital y Sustrato</h2>
-        <div class="grid">
-            <div class="input-group">
-                <label for="ph">pH (Potencial Adaptativo)</label>
-                <input type="number" id="ph" step="0.01" placeholder="7.35 - 7.45">
-            </div>
-            <div class="input-group">
-                <label for="pco2">pCO₂ (Intercambio)</label>
-                <input type="number" id="pco2" placeholder="mmHg">
-            </div>
-            <div class="input-group">
-                <label for="lactato">Lactato (Eco Tisular)</label>
-                <input type="number" id="lactato" step="0.1" placeholder="mmol/L">
-            </div>
-            <div class="input-group">
-                <label for="glucosa">Glucosa (Sustrato)</label>
-                <input type="number" id="glucosa" placeholder="mg/dL">
-            </div>
+    <div class="container">
+        <h1>Suite Neonatal</h1>
+        
+        <div class="card">
+            <input type="number" id="ph" step="0.01" placeholder="pH (7.35-7.45)">
+            <input type="number" id="pco2" placeholder="pCO2">
+            <input type="number" id="lactato" step="0.1" placeholder="Lactato">
+            <input type="number" id="glucosa" placeholder="Glucosa">
+            <div id="resultado">---</div>
         </div>
-    </section>
 
-    <div id="reflexion-container" class="reflexion-box">
-        <span id="label-estado">Estado del Sistema:</span>
-        <span id="evaluacion-clinica">Iniciando observación reflexiva...</span>
+        <nav class="menu">
+            <a href="apgar.html">Apgar</a>
+            <a href="silverman.html">Silverman</a>
+            <a href="ballard.html">Ballard</a>
+            <a href="farmaco.html">Fármacos</a>
+            <a href="ventilacion.html">Ventilación</a>
+            <a href="laboratorio.html">Laboratorio</a>
+        </nav>
     </div>
-
-    <section class="card" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
-        <h3 style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Herramientas de Valoración</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px;">
-            <a href="apgar.html" class="btn-nav">Apgar</a>
-            <a href="silverman.html" class="btn-nav">Silverman</a>
-            <a href="ballard.html" class="btn-nav">Ballard</a>
-            <a href="farmaco.html" class="btn-nav">Fármacos</a>
-            <a href="ventilacion.html" class="btn-nav">Ventilación</a>
-            <a href="laboratorio.html" class="btn-nav">Laboratorio</a>
-        </div>
-    </section>
-</div>
-
-<style>
-    /* Estilos rápidos para el menú */
-    .btn-nav {
-        text-decoration: none;
-        color: #64748b;
-        background: #f8fafc;
-        padding: 10px;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 0.8rem;
-        border: 1px solid #e2e8f0;
-        transition: 0.3s;
-    }
-    .btn-nav:hover {
-        background: #e2e8f0;
-        color: #1e293b;
-    }
-</style>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
