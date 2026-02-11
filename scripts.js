@@ -1,56 +1,63 @@
-document.addEventListener('change', function() {
-    // 1. LÓGICA PARA APGAR Y SILVERMAN (Suma simple)
-    const contenedor = document.getElementById('modulo-calculo');
-    const displayResultado = document.getElementById('resultado');
-
-    if (contenedor && displayResultado) {
-        let total = 0;
-        const seleccionados = contenedor.querySelectorAll('input[type="radio"]:checked');
-        
-        seleccionados.forEach(radio => {
-            total += parseInt(radio.value);
-        });
-
-        displayResultado.innerText = total;
-
-        // Cambiar color según el puntaje (Opcional)
-        if (total >= 7) displayResultado.style.color = "#2ed573"; // Verde
-        else if (total >= 4) displayResultado.style.color = "#ffa502"; // Naranja
-        else displayResultado.style.color = "#ff4757"; // Rojo
-    }
-
-    // 2. LÓGICA ESPECÍFICA PARA CAPURRO
-    const displaySemanas = document.getElementById('resultado-semanas');
-    const displayDiasText = document.getElementById('resultado-dias');
-
-    if (displaySemanas) {
-        let puntajeCapurro = 0;
-        const radiosCapurro = document.querySelectorAll('input[type="radio"]:checked');
-        
-        radiosCapurro.forEach(radio => {
-            puntajeCapurro += parseInt(radio.value);
-        });
-
-        // CONSTANTE DE CAPURRO: 204
-        let diasTotales = 204 + puntajeCapurro;
-        let semanas = Math.floor(diasTotales / 7);
-        let diasRestantes = diasTotales % 7;
-
-        displaySemanas.innerText = semanas;
-        displayDiasText.innerText = `(+ ${diasRestantes} días) | Total: ${diasTotales} días`;
-    }
-});
-
-// 3. BUSCADOR UNIVERSAL (Para el Index y Recursos)
-const buscador = document.getElementById('search-extra') || document.getElementById('busqueda-lab');
-if (buscador) {
-    buscador.addEventListener('keyup', function() {
-        let filtro = this.value.toLowerCase();
-        let bloques = document.querySelectorAll('.bloque-recurso, .card');
-        
-        bloques.forEach(bloque => {
-            let texto = bloque.innerText.toLowerCase();
-            bloque.style.display = texto.includes(filtro) ? '' : 'none';
+// Lógica de Soporte Vital Neonatal
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Monitoreo de Alertas en Tiempo Real
+    const inputs = document.querySelectorAll('input[type="number"]');
+    
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            validarLimites(input);
+            calcular指标();
         });
     });
-}
+
+    function validarLimites(campo) {
+        const valor = parseFloat(campo.value);
+        if (isNaN(valor)) return;
+
+        // Lógica de semaforización para enfermería
+        let esAlarma = false;
+
+        // Ejemplo: Alerta de Glucosa
+        if (campo.id === 'glucosa' && (valor < 40 || valor > 125)) esAlarma = true;
+        
+        // Ejemplo: Alerta de Lactato
+        if (campo.id === 'lactato' && valor > 2.5) esAlarma = true;
+
+        if (esAlarma) {
+            campo.style.backgroundColor = '#fee2e2'; // Rojo suave
+            campo.style.borderColor = '#ef4444';     // Rojo intenso
+        } else {
+            campo.style.backgroundColor = '';
+            campo.style.borderColor = '';
+        }
+    }
+
+    function calcular指标() {
+        // Cálculo de Pérdida de Peso
+        const pNacer = parseFloat(document.getElementById('pesoNacer')?.value);
+        const pActual = parseFloat(document.getElementById('pesoActual')?.value);
+        
+        if (pNacer && pActual) {
+            const perdida = ((pNacer - pActual) / pNacer) * 100;
+            const msgPeso = document.getElementById('msg-peso');
+            if (perdida > 10) {
+                console.warn("ALERTA: Pérdida de peso superior al 10%");
+                // Aquí podrías mostrar un aviso visual en la interfaz
+            }
+        }
+
+        // Cálculo de Índice I/T (Sepsis)
+        const inmaduros = parseFloat(document.getElementById('neutrosInmaduros')?.value);
+        const totales = parseFloat(document.getElementById('neutrosTotales')?.value);
+        
+        if (inmaduros && totales) {
+            const indiceIT = inmaduros / totales;
+            const itCampo = document.getElementById('resultadoIT');
+            if (itCampo) {
+                itCampo.innerText = indiceIT.toFixed(2);
+                itCampo.className = indiceIT > 0.22 ? 'alert-text' : '';
+            }
+        }
+    }
+});
