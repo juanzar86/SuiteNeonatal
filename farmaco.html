@@ -3,59 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmacología Neonatal - Suite</title>
+    <title>Vademécum Neonatal - Suite</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
         <a href="index.html" class="card" style="display:inline-block; padding: 5px 15px; margin-bottom:10px;">⬅ Volver</a>
-        <h1>Farmacología Neonatal</h1>
+        <h1>Vademécum Neonatal</h1>
+        <input type="text" id="busqueda-farmaco" placeholder="🔍 Buscar medicamento..." style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; box-sizing: border-box;">
     </header>
 
     <main>
-        <div class="bloque-recurso" style="background: #e8f4fd; border-left: 5px solid #3498db;">
-            <h3>🧮 Calculadora de Dosis Automática</h3>
-            <p>Peso del Neonato (kg): <input type="number" id="peso" step="0.1" placeholder="Ej: 2.5" style="padding:8px; border-radius:5px; border:1px solid #ccc; width:80px;"></p>
-        </div>
-
-        <section class="bloque-recurso">
-            <h2 style="color: #2c3e50; border-bottom: 2px solid #eee;">🧪 Farmacocinética</h2>
-            <div id="contenido-cinetica">
-                <p><i>Absorción, distribución, metabolismo y excreción adaptados a la inmadurez orgánica del neonato.</i></p>
-            </div>
+        <section class="bloque-recurso" style="border-left: 5px solid #a55eea;">
+            <details open>
+                <summary style="font-weight: bold; cursor: pointer;">📖 Farmacocinética y Dinamia</summary>
+                <div style="padding-top:15px; font-size: 0.9rem;">
+                    <h4 style="margin: 5px 0;">Farmacocinética:</h4>
+                    <p><i>[Escribe o pega aquí tu texto sobre absorción y metabolismo]</i></p>
+                    
+                    <h4 style="margin: 15px 0 5px 0;">Farmacodinamia:</h4>
+                    <p><i>[Escribe o pega aquí tu texto sobre mecanismos de acción]</i></p>
+                </div>
+            </details>
         </section>
 
         <section class="bloque-recurso">
-            <h2 style="color: #2c3e50; border-bottom: 2px solid #eee;">🔬 Farmacodinamia</h2>
-            <div id="contenido-dinamia">
-                <p><i>Mecanismos de acción y efectos bioquímicos en el paciente neonatal.</i></p>
-            </div>
-        </section>
-
-        <section class="bloque-recurso">
-            <h3>📋 Referencia de Antibióticos</h3>
+            <h3>Lista de Fármacos</h3>
             <div style="overflow-x: auto;">
-                <table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
+                <table id="tabla-medicamentos" style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
                     <thead>
-                        <tr style="background:#f2f2f2;">
-                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">Medicamento</th>
-                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">Dosis Estándar</th>
+                        <tr style="background:#2c3e50; color:white;">
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">Fármaco</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">Dosis / Notas</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="padding:10px; border:1px solid #ddd;">Ampicilina</td>
-                            <td style="padding:10px; border:1px solid #ddd;">50 mg/kg/dosis</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px; border:1px solid #ddd;">Gentamicina</td>
-                            <td style="padding:10px; border:1px solid #ddd;">4-5 mg/kg/dosis</td>
-                        </tr>
-                    </tbody>
+                        <tr><td><strong>Amikacina</strong></td><td>15 mg/kg/día</td></tr>
+                        <tr><td><strong>Ampicilina</strong></td><td>100-200 mg/kg/día</td></tr>
+                        <tr><td><strong>Bencilpenicilina</strong></td><td>50,000 UI/kg/dosis</td></tr>
+                        <tr><td><strong>Cefotaxima</strong></td><td>50 mg/kg/dosis</td></tr>
+                        <tr><td><strong>Dexametasona</strong></td><td>0.15 mg/kg/día</td></tr>
+                        <tr><td><strong>Dopamina</strong></td><td>2-20 mcg/kg/min</td></tr>
+                        </tbody>
                 </table>
             </div>
         </section>
     </main>
+
+    <script>
+        // Este código hace que el buscador funcione específicamente en esta tabla
+        document.getElementById('busqueda-farmaco').addEventListener('keyup', function() {
+            let filtro = this.value.toLowerCase();
+            let filas = document.querySelectorAll('#tabla-medicamentos tbody tr');
+            filas.forEach(fila => {
+                fila.style.display = fila.innerText.toLowerCase().includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
