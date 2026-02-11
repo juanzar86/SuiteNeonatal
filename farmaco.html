@@ -9,47 +9,52 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="card" style="display:inline-block; padding: 5px 15px;">⬅ Volver</a>
+        <a href="index.html" class="card" style="display:inline-block; padding: 5px 15px; margin-bottom:10px;">⬅ Volver</a>
         <h1>Farmacología Neonatal</h1>
-        <p>Dosificación, Farmacocinética y Dinamia</p>
     </header>
 
     <main>
-        <section class="bloque-recurso" style="border-left-color: #3498db;">
-            <h3>Calculadora de Dosis Rápida</h3>
-            <p><i>Próximamente: Ingresa el peso para obtener dosis exactas.</i></p>
-        </section>
+        <div class="bloque-recurso" style="background: #e8f4fd; border-left: 5px solid #3498db;">
+            <h3>🧮 Calculadora de Dosis Automática</h3>
+            <p>Peso del Neonato (kg): <input type="number" id="peso" step="0.1" placeholder="Ej: 2.5" style="padding:8px; border-radius:5px; border:1px solid #ccc; width:80px;"></p>
+        </div>
 
         <section class="bloque-recurso">
-            <h2 style="color: #2c3e50;">💊 Farmacocinética Neonatal</h2>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
-                <p>Aquí se mantiene toda tu información sobre absorción, distribución, metabolismo y excreción en el recién nacido...</p>
+            <h2 style="color: #2c3e50; border-bottom: 2px solid #eee;">🧪 Farmacocinética</h2>
+            <div id="contenido-cinetica">
+                <p><i>Absorción, distribución, metabolismo y excreción adaptados a la inmadurez orgánica del neonato.</i></p>
             </div>
         </section>
 
         <section class="bloque-recurso">
-            <h2 style="color: #2c3e50;">🔬 Farmacodinamia</h2>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
-                <p>Aquí se mantiene tu información sobre la interacción fármaco-receptor y los efectos fisiológicos...</p>
+            <h2 style="color: #2c3e50; border-bottom: 2px solid #eee;">🔬 Farmacodinamia</h2>
+            <div id="contenido-dinamia">
+                <p><i>Mecanismos de acción y efectos bioquímicos en el paciente neonatal.</i></p>
             </div>
         </section>
 
         <section class="bloque-recurso">
-            <h3>Principales Fármacos</h3>
-            <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
-                <tr style="background:#eee;">
-                    <th style="padding:8px; border:1px solid #ddd;">Fármaco</th>
-                    <th style="padding:8px; border:1px solid #ddd;">Dosis sugerida</th>
-                </tr>
-                <tr>
-                    <td style="padding:8px; border:1px solid #ddd;">Ampicilina</td>
-                    <td style="padding:8px; border:1px solid #ddd;">50-100 mg/kg/día</td>
-                </tr>
-                <tr>
-                    <td style="padding:8px; border:1px solid #ddd;">Gentamicina</td>
-                    <td style="padding:8px; border:1px solid #ddd;">4-5 mg/kg/dosis</td>
-                </tr>
-            </table>
+            <h3>📋 Referencia de Antibióticos</h3>
+            <div style="overflow-x: auto;">
+                <table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
+                    <thead>
+                        <tr style="background:#f2f2f2;">
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">Medicamento</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">Dosis Estándar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:10px; border:1px solid #ddd;">Ampicilina</td>
+                            <td style="padding:10px; border:1px solid #ddd;">50 mg/kg/dosis</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px; border:1px solid #ddd;">Gentamicina</td>
+                            <td style="padding:10px; border:1px solid #ddd;">4-5 mg/kg/dosis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 </body>
