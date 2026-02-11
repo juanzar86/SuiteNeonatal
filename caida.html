@@ -3,71 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riesgo de Caída - Suite Neonatal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Riesgo de Caída - Suite</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
-<body class="bg-slate-50 p-4 min-h-screen">
+<body>
+    <header>
+        <a href="index.html" class="card" style="display:inline-block; padding: 5px 15px; margin-bottom:10px;">⬅ Volver</a>
+        <h1>Riesgo de Caída (Macems)</h1>
+    </header>
 
-    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-xl p-6 border-t-8 border-orange-500">
-        <header class="text-center mb-6">
-            <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Riesgo de Caída</h1>
-            <p class="text-[10px] font-bold text-orange-600 uppercase tracking-widest text-center">Escala Humpty Dumpty</p>
-        </header>
-
-        <div class="space-y-4">
-            <div class="bg-orange-50 p-5 rounded-2xl border border-orange-100">
-                <label class="block text-[10px] font-black text-orange-800 uppercase mb-2 text-center">Puntaje Total (7 a 23)</label>
-                <input type="number" id="score_caida" min="7" max="23" oninput="calcularCaida()" placeholder="Ej: 12" 
-                class="w-full p-3 rounded-xl border-none focus:ring-2 focus:ring-orange-400 font-bold text-lg text-center shadow-sm outline-none">
-            </div>
-
-            <div id="res_caida" class="hidden space-y-4">
-                <div id="box_alerta_caida" class="p-4 rounded-2xl text-center shadow-sm border">
-                    <p id="nivel_caida" class="font-black text-xl uppercase tracking-tighter"></p>
-                </div>
-
-                <div class="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm">
-                    <p class="text-[10px] font-black text-slate-400 uppercase mb-3 text-center tracking-widest italic">Protocolo de Seguridad</p>
-                    <ul class="text-xs text-slate-700 space-y-3 font-medium">
-                        <li class="flex items-start gap-2">⚠️ Barandales de la cuna o incubadora siempre elevados.</li>
-                        <li class="flex items-start gap-2">⚠️ Frenos de la unidad siempre activados.</li>
-                        <li class="flex items-start gap-2">⚠️ Supervisión directa durante el pesaje o procedimientos.</li>
-                        <li class="flex items-start gap-2">⚠️ Educación a los padres sobre el manejo seguro del neonato.</li>
-                    </ul>
-                </div>
-            </div>
+    <main id="modulo-calculo">
+        <div class="pizarra-resultado">
+            Riesgo: <span id="resultado">0</span>
         </div>
 
-        <div class="mt-8 text-center">
-            <a href="index.html" class="text-slate-400 text-xs font-black uppercase tracking-widest hover:text-orange-600 transition">
-                ← Volver al Menú
-            </a>
-        </div>
-    </div>
+        <section class="bloque-recurso">
+            <h3>Edad</h3>
+            <label><input type="radio" name="rc1" value="4"> < 3 años (4)</label><br>
+            <label><input type="radio" name="rc1" value="3"> 3 - 7 años (3)</label><br>
+            <label><input type="radio" name="rc1" value="2"> 7 - 13 años (2)</label><br>
+            <label><input type="radio" name="rc1" value="1"> > 13 años (1)</label>
+        </section>
 
-    <script>
-        function calcularCaida() {
-            const score = parseInt(document.getElementById('score_caida').value);
-            const res = document.getElementById('res_caida');
-            const box = document.getElementById('box_alerta_caida');
-            const msg = document.getElementById('nivel_caida');
+        <section class="bloque-recurso">
+            <h3>Estado Mental</h3>
+            <label><input type="radio" name="rc2" value="3"> Desorientado / Confuso (3)</label><br>
+            <label><input type="radio" name="rc2" value="2"> Limitación sensorial (2)</label><br>
+            <label><input type="radio" name="rc2" value="1"> Orientado / No aplica (1)</label>
+        </section>
 
-            if (!score || score < 7) {
-                res.classList.add('hidden');
-                return;
-            }
-
-            res.classList.remove('hidden');
-
-            // Lógica de Riesgo Humpty Dumpty
-            if (score >= 12) {
-                box.className = "p-4 rounded-2xl text-center bg-rose-50 border-rose-200 text-rose-600 shadow-inner font-bold";
-                msg.innerText = "🚨 Riesgo Alto (Score ≥ 12)";
-            } else {
-                box.className = "p-4 rounded-2xl text-center bg-emerald-50 border-emerald-200 text-emerald-600 shadow-inner font-bold";
-                msg.innerText = "✅ Riesgo Bajo (7-11)";
-            }
-        }
-    </script>
+        <section class="bloque-recurso">
+            <h3>Medicamentos (Sedantes, Hipnóticos, Laxantes)</h3>
+            <label><input type="radio" name="rc3" value="3"> Uso de múltiples medicamentos (3)</label><br>
+            <label><input type="radio" name="rc3" value="2"> Uso de un medicamento (2)</label><br>
+            <label><input type="radio" name="rc3" value="1"> Sin medicamentos (1)</label>
+        </section>
+    </main>
 </body>
 </html>
