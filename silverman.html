@@ -3,45 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Silverman</title>
-    <style>
-        body { background: #121212; color: white; font-family: sans-serif; padding: 20px; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; }
-        select { width: 100%; padding: 10px; margin: 10px 0; background: #333; color: white; border: none; border-radius: 5px; }
-        .btn { display: block; width: 100%; padding: 15px; background: #28a745; color: white; text-align: center; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        #res { margin-top: 20px; text-align: center; font-size: 1.2em; }
-    </style>
+    <title>Test de Silverman - Suite Neonatal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-<div class="card">
-    <h2>🫁 Test de Silverman</h2>
-    <label>Mov. tóraco-abdominal:</label>
-    <select id="s1"><option value="0">0 - Rítmicos/Regulares</option><option value="1">1 - Tórax inmóvil</option><option value="2">2 - Disociación</option></select>
-    
-    <label>Tiraje intercostal:</label>
-    <select id="s2"><option value="0">0 - Ausente</option><option value="1">1 - Leve</option><option value="2">2 - Marcado</option></select>
-    
-    <label>Retracción xifoidea:</label>
-    <select id="s3"><option value="0">0 - Ausente</option><option value="1">1 - Leve</option><option value="2">2 - Marcada</option></select>
-    
-    <label>Aleteo nasal:</label>
-    <select id="s4"><option value="0">0 - Ausente</option><option value="1">1 - Leve</option><option value="2">2 - Marcado</option></select>
-    
-    <label>Quejido espiratorio:</label>
-    <select id="s5"><option value="0">0 - Ausente</option><option value="1">1 - Audible con esteto</option><option value="2">2 - Audible a distancia</option></select>
+    <header>
+        <a href="index.html" class="card" style="display:inline-block; padding: 5px 15px;">⬅ Volver</a>
+        <h1>Test de Silverman-Andersen</h1>
+    </header>
 
-    <button class="btn" onclick="calcS()">Calcular Silverman</button>
-    <div id="res"></div>
-    <a href="index.html" style="color: #bbb; display: block; text-align: center; margin-top: 15px; text-decoration: none;">← Volver</a>
-</div>
-<script>
-function calcS() {
-    let t = parseInt(document.getElementById('s1').value) + parseInt(document.getElementById('s2').value) + 
-            parseInt(document.getElementById('s3').value) + parseInt(document.getElementById('s4').value) + 
-            parseInt(document.getElementById('s5').value);
-    let m = t === 0 ? "Sin dificultad" : (t <= 3 ? "Leve" : (t <= 5 ? "Moderada" : "Grave"));
-    document.getElementById('res').innerHTML = "Puntaje: " + t + "<br>Grado: " + m;
-}
-</script>
+    <main id="modulo-calculo">
+        <div class="pizarra-resultado">
+            Puntaje: <span id="resultado">0</span>
+            <p style="font-size: 0.9rem; font-weight: normal;">(0 = Normal | 10 = Dificultad grave)</p>
+        </div>
+
+        <section class="bloque-recurso">
+            <h3>Movimientos toraco-abdominales</h3>
+            <label><input type="radio" name="s1" value="0"> Rítmicos y regulares (0)</label><br>
+            <label><input type="radio" name="s1" value="1"> Tórax inmóvil, abdomen se mueve (1)</label><br>
+            <label><input type="radio" name="s1" value="2"> Disociación toraco-abdominal (2)</label>
+        </section>
+
+        <section class="bloque-recurso">
+            <h3>Tiraje intercostal</h3>
+            <label><input type="radio" name="s2" value="0"> Ausente (0)</label><br>
+            <label><input type="radio" name="s2" value="1"> Leve (1)</label><br>
+            <label><input type="radio" name="s2" value="2"> Marcado y constante (2)</label>
+        </section>
+
+        <section class="bloque-recurso">
+            <h3>Retracción xifoidea</h3>
+            <label><input type="radio" name="s3" value="0"> Ausente (0)</label><br>
+            <label><input type="radio" name="s3" value="1"> Leve (1)</label><br>
+            <label><input type="radio" name="s3" value="2"> Marcada (2)</label>
+        </section>
+
+        <section class="bloque-recurso">
+            <h3>Aleteo nasal</h3>
+            <label><input type="radio" name="s4" value="0"> Ausente (0)</label><br>
+            <label><input type="radio" name="s4" value="1"> Leve (1)</label><br>
+            <label><input type="radio" name="s4" value="2"> Marcado (2)</label>
+        </section>
+
+        <section class="bloque-recurso">
+            <h3>Quejido espiratorio</h3>
+            <label><input type="radio" name="s5" value="0"> Ausente (0)</label><br>
+            <label><input type="radio" name="s5" value="1"> Audible con estetoscopio (1)</label><br>
+            <label><input type="radio" name="s5" value="2"> Audible a distancia (2)</label>
+        </section>
+    </main>
 </body>
 </html>
