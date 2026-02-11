@@ -3,86 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio Neonatal - Suite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Laboratorio y Bilirrubinas (NICE) - Suite</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
-<body class="bg-slate-50 p-4 min-h-screen">
+<body>
+    <header>
+        <a href="index.html" class="card" style="display:inline-block; padding: 5px 15px; margin-bottom:10px;">⬅ Volver</a>
+        <h1>Laboratorio y Bilirrubinas</h1>
+        <p style="font-size: 0.8rem; color: #666;">Basado en Guías NICE CG98</p>
+    </header>
 
-    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-xl p-6 border-t-8 border-purple-600">
-        <header class="text-center mb-6">
-            <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Laboratorio</h1>
-            <p class="text-[10px] font-bold text-purple-600 uppercase tracking-widest text-center">Gases y Bilirrubinas</p>
-        </header>
-
-        <div class="space-y-6">
-            <div class="bg-purple-50 p-4 rounded-2xl border border-purple-100">
-                <h2 class="text-[10px] font-black text-purple-800 uppercase mb-3">Interpretación de Gases</h2>
-                <div class="grid grid-cols-2 gap-2 mb-3">
-                    <input type="number" id="ph" step="0.01" placeholder="pH (7.35-7.45)" class="p-2 rounded-lg border-none text-sm font-bold shadow-sm outline-none">
-                    <input type="number" id="pco2" placeholder="pCO2 (35-45)" class="p-2 rounded-lg border-none text-sm font-bold shadow-sm outline-none">
-                </div>
-                <button onclick="interpretarGases()" class="w-full bg-purple-600 text-white py-2 rounded-xl font-black text-xs uppercase shadow-md">Interpretar Gas</button>
-                <p id="res-gases" class="mt-3 text-center font-bold text-xs text-purple-700"></p>
+    <main>
+        <section class="bloque-recurso" style="border-left: 5px solid #f1c40f; background: #fff9e6;">
+            <h3 style="color: #d4ac0d;">🟡 Bilirrubinas (Manejo de Ictericia)</h3>
+            <p style="font-size: 0.85rem;"><strong>Criterios de Intervención (NICE):</strong></p>
+            
+            <div style="background: white; padding: 10px; border-radius: 8px; font-size: 0.85rem; border: 1px solid #f1c40f;">
+                <p><strong>Factores de Riesgo:</strong> Edad gestacional < 38 sem, hermano con ictericia que requirió fototerapia, lactancia materna exclusiva.</p>
+                <hr>
+                <p><strong>Umbrales rápidos (RNT >38 sem):</strong></p>
+                <ul>
+                    <li><strong>< 24h:</strong> Siempre es patológica. Fototerapia inmediata.</li>
+                    <li><strong>24h:</strong> Iniciar si > 100 µmol/L (5.8 mg/dL).</li>
+                    <li><strong>48h:</strong> Iniciar si > 150 µmol/L (8.8 mg/dL).</li>
+                </ul>
+                <p style="font-size: 0.75rem; color: #777;">*Conversión: mg/dL = µmol/L ÷ 17.1</p>
             </div>
 
-            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100">
-                <h2 class="text-[10px] font-black text-amber-800 uppercase mb-3">Bilirrubinas (Bilis)</h2>
-                <div class="space-y-2 mb-3">
-                    <input type="number" id="horas" placeholder="Horas de vida" class="w-full p-2 rounded-lg border-none text-sm font-bold shadow-sm outline-none">
-                    <input type="number" id="btotal" step="0.1" placeholder="Bilirrubina Total (mg/dL)" class="w-full p-2 rounded-lg border-none text-sm font-bold shadow-sm outline-none">
+            <div style="margin-top: 15px; text-align: center;">
+                <p style="font-size: 0.8rem; font-weight: bold;">📊 Interpretación de Gráficas NICE:</p>
+                <div style="background: #eee; height: 150px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; border-radius: 10px;">
+                    <p style="color: #666; font-size: 0.8rem; padding: 10px;">
+                        [Aquí puedes subir tu imagen de la gráfica NICE CG98 de tu hospital]
+                    </p>
                 </div>
-                <button onclick="evaluarBilis()" class="w-full bg-amber-500 text-white py-2 rounded-xl font-black text-xs uppercase shadow-md">Evaluar Ictericia</button>
-                <div id="res-bilis" class="mt-3 p-3 rounded-xl hidden"></div>
+                <p style="font-size: 0.75rem; margin-top: 5px; color: #2980b9;">Recuerda usar la gráfica específica según la Edad Gestacional (23 a 38+ semanas).</p>
             </div>
-        </div>
+        </section>
 
-        <div class="mt-8 text-center">
-            <a href="index.html" class="text-slate-400 text-xs font-black uppercase tracking-widest hover:text-purple-600 transition">
-                ← Volver al Menú
-            </a>
-        </div>
-    </div>
+        <section class="bloque-recurso" style="border-left: 5px solid #ff4757;">
+            <h3>Arterial y Biometría</h3>
+            <p style="font-size: 0.85rem;"><strong>pH:</strong> 7.35 - 7.45 | <strong>pCO2:</strong> 35 - 45</p>
+            <p style="font-size: 0.85rem;"><strong>Hto:</strong> 45-60% | <strong>Plaquetas:</strong> >150k</p>
+        </section>
 
-    <script>
-        function interpretarGases() {
-            const ph = parseFloat(document.getElementById('ph').value);
-            const pco2 = parseFloat(document.getElementById('pco2').value);
-            const res = document.getElementById('res-gases');
-
-            if (!ph || !pco2) return;
-
-            let estado = "";
-            if (ph < 7.35) estado = "🚨 Acidemia";
-            else if (ph > 7.45) estado = "⚠️ Alcalemia";
-            else estado = "✅ pH Normal";
-
-            let causa = "";
-            if (pco2 > 45) causa = " con Acidosis Respiratoria";
-            else if (pco2 < 35) causa = " con Alcalosis Respiratoria";
-
-            res.innerText = estado + causa;
-        }
-
-        function evaluarBilis() {
-            const h = parseInt(document.getElementById('horas').value);
-            const bt = parseFloat(document.getElementById('btotal').value);
-            const res = document.getElementById('res-bilis');
-
-            if (!h || !bt) return;
-
-            res.classList.remove('hidden');
-            let nivel = "";
-            let color = "";
-
-            // Lógica basada en Nomograma de Bhutani simplificado
-            if (h < 24 && bt > 5) { nivel = "🚨 ALTO RIESGO (Ictericia Precoz)"; color = "bg-rose-100 text-rose-700"; }
-            else if (h >= 24 && h < 48 && bt > 12) { nivel = "⚠️ RIESGO MODERADO"; color = "bg-amber-100 text-amber-700"; }
-            else if (h >= 48 && bt > 15) { nivel = "⚠️ EVALUAR FOTOTERAPIA"; color = "bg-amber-100 text-amber-700"; }
-            else { nivel = "✅ NIVEL SEGURO"; color = "bg-emerald-100 text-emerald-700"; }
-
-            res.className = `mt-3 p-3 rounded-xl font-bold text-xs text-center ${color}`;
-            res.innerText = nivel;
-        }
-    </script>
+    </main>
 </body>
 </html>
