@@ -15,36 +15,31 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #f8f9fa;
             scroll-behavior: smooth;
         }
 
-        /* Vistas (Secciones) */
-        .page {
-            display: none;
-            width: 100%;
-            min-height: 100vh;
-            background: var(--blanco);
-        }
+        .page { display: none; width: 100%; min-height: 100vh; background: var(--blanco); }
+        .active { display: block; animation: fadeIn 0.3s; }
 
-        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Cabecera */
+        /* Cabecera Principal */
         .header {
             background-color: var(--rosa-fuerte);
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             border-radius: 0 0 40px 40px;
             color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .logo-box {
             background: white;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             margin: 0 auto 15px;
             border-radius: 20px;
             display: flex;
@@ -52,54 +47,44 @@
             justify-content: center;
         }
 
-        /* Botones del Menú */
-        .container { padding: 20px; max-width: 450px; margin: -30px auto 0; }
+        .container { padding: 20px; max-width: 450px; margin: -35px auto 0; }
 
+        /* Botones */
         .btn {
-            display: block;
-            width: 100%;
-            padding: 18px;
-            margin-bottom: 12px;
-            border-radius: 25px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: block; width: 100%; padding: 18px; margin-bottom: 15px;
+            border-radius: 30px; text-align: center; text-decoration: none;
+            font-weight: bold; border: none; cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-size: 1rem;
         }
 
         .btn-registros { background: var(--azul-oscuro); color: white; }
         .btn-diluciones { background: var(--amarillo); color: #5d4037; }
-        .btn-item { background: white; color: #0277bd; border: 1px solid #eee; }
-        .btn-pink { background: var(--rosa-claro); color: var(--rosa-fuerte); }
+        .btn-item { background: white; color: #0277bd; border: 1px solid #eee; text-transform: uppercase; }
+        .btn-pink { background: var(--rosa-claro); color: var(--rosa-fuerte); border: none; }
 
         .section-label {
-            color: var(--rosa-fuerte);
-            font-weight: bold;
-            margin: 20px 0 10px 10px;
-            font-size: 0.9rem;
+            color: var(--rosa-fuerte); font-weight: bold;
+            margin: 25px 0 10px 10px; font-size: 0.85rem; text-transform: uppercase;
         }
 
-        /* Estilo de las subpáginas */
-        .subpage-header {
-            background: var(--rosa-fuerte);
-            padding: 20px;
-            color: white;
-            display: flex;
-            align-items: center;
+        /* Subpáginas */
+        .sub-header {
+            background: var(--rosa-fuerte); padding: 15px 20px;
+            color: white; display: flex; align-items: center;
+            position: sticky; top: 0; z-index: 100;
         }
 
         .back-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-right: 15px;
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            padding: 8px 15px; border-radius: 15px; cursor: pointer; margin-right: 15px;
         }
 
-        .content-area { padding: 20px; text-align: center; }
+        .content-area { padding: 30px 20px; text-align: center; color: #666; }
+        
+        /* Tabla simple para diluciones */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: var(--rosa-claro); color: var(--rosa-fuerte); }
     </style>
 </head>
 <body>
@@ -107,63 +92,97 @@
     <div id="home" class="page active">
         <div class="header">
             <div class="logo-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/2864/2864448.png" width="50" alt="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063176.png" width="60" alt="logo">
             </div>
             <h1>SUITE NEONATAL</h1>
         </div>
 
         <div class="container">
-            <button class="btn btn-registros" onclick="showPage('page-registros')">📋 REGISTROS</button>
-            <button class="btn btn-diluciones" onclick="showPage('page-diluciones')">DILUCIONES 💊</button>
+            <button class="btn btn-registros" onclick="show('page-registros')">📋 REGISTROS</button>
+            <button class="btn btn-diluciones" onclick="show('page-diluciones')">DILUCIONES 💊</button>
 
-            <div class="section-label">VALORACIÓN CLÍNICA</div>
-            <button class="btn btn-item" onclick="showPage('page-apgar')">⭐ APGAR</button>
-            <button class="btn btn-item" onclick="showPage('page-silverman')">🌬️ SILVERMAN</button>
-            <button class="btn btn-item" onclick="showPage('page-ballard')">📅 BALLARD</button>
-            <button class="btn btn-item" onclick="showPage('page-capurro')">👶 CAPURRO</button>
+            <div class="section-label">Valoración Clínica</div>
+            <button class="btn btn-item" onclick="show('page-apgar')">⭐ APGAR</button>
+            <button class="btn btn-item" onclick="show('page-silverman')">🌬️ SILVERMAN</button>
+            <button class="btn btn-item" onclick="show('page-ballard')">📅 BALLARD</button>
+            <button class="btn btn-item" onclick="show('page-capurro')">👶 CAPURRO</button>
 
-            <div class="section-label">SEGURIDAD Y SOPORTE</div>
-            <button class="btn btn-item" onclick="showPage('page-upp')">🛡️ RIESGO UPP</button>
-            <button class="btn btn-item" onclick="showPage('page-caidas')">👣 CAÍDAS</button>
-            <button class="btn btn-item" onclick="showPage('page-marsi')">🩹 MARSI</button>
+            <div class="section-label">Seguridad y Soporte</div>
+            <button class="btn btn-item" onclick="show('page-upp')">🛡️ RIESGO UPP</button>
+            <button class="btn btn-item" onclick="show('page-caidas')">👣 CAÍDAS</button>
+            <button class="btn btn-item" onclick="show('page-marsi')">🩹 MARSI</button>
 
-            <button class="btn btn-pink" style="margin-top:20px" onclick="showPage('page-signos')">SIGNOS VITALES</button>
+            <button class="btn btn-pink" style="margin-top:20px" onclick="show('page-signos')">SIGNOS VITALES</button>
+        </div>
+    </div>
+
+    <div id="page-diluciones" class="page">
+        <div class="sub-header">
+            <button class="back-btn" onclick="show('home')">← Volver</button>
+            <h3>Guía de Diluciones</h3>
+        </div>
+        <div class="content-area">
+            <p>Cálculo de diluciones de medicamentos neonatales comunes.</p>
+            <table>
+                <tr><th>Fármaco</th><th>Dilución Recomendada</th></tr>
+                <tr><td>Ampicilina</td><td>50 mg/ml</td></tr>
+                <tr><td>Amikacina</td><td>5 mg/ml</td></tr>
+                <tr><td>Gentamicina</td><td>2 mg/ml</td></tr>
+            </table>
         </div>
     </div>
 
     <div id="page-registros" class="page">
-        <div class="subpage-header">
-            <button class="back-btn" onclick="showPage('home')">←</button>
-            <h2>Registros Clínicos</h2>
-        </div>
-        <div class="content-area">
-            <p>Módulo de registro de enfermería en desarrollo.</p>
-        </div>
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Registros</h3></div>
+        <div class="content-area"><p>Módulo de Registros de Enfermería.</p></div>
     </div>
 
     <div id="page-apgar" class="page">
-        <div class="subpage-header">
-            <button class="back-btn" onclick="showPage('home')">←</button>
-            <h2>Escala de APGAR</h2>
-        </div>
-        <div class="content-area">
-            <p>Calculadora de vitalidad del recién nacido.</p>
-        </div>
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>APGAR</h3></div>
+        <div class="content-area"><p>Escala de vitalidad del recién nacido.</p></div>
+    </div>
+
+    <div id="page-silverman" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Silverman</h3></div>
+        <div class="content-area"><p>Evaluación de dificultad respiratoria.</p></div>
+    </div>
+
+    <div id="page-ballard" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Ballard</h3></div>
+        <div class="content-area"><p>Estimación de edad gestacional.</p></div>
+    </div>
+
+    <div id="page-capurro" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Capurro</h3></div>
+        <div class="content-area"><p>Valoración de edad gestacional somática.</p></div>
+    </div>
+
+    <div id="page-upp" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Riesgo UPP</h3></div>
+        <div class="content-area"><p>Escala de Braden Q / Prevención de úlceras.</p></div>
+    </div>
+
+    <div id="page-caidas" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Caídas</h3></div>
+        <div class="content-area"><p>Protocolo de prevención de caídas neonatales.</p></div>
+    </div>
+
+    <div id="page-marsi" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>MARSI</h3></div>
+        <div class="content-area"><p>Lesiones cutáneas relacionadas con adhesivos médicos.</p></div>
+    </div>
+
+    <div id="page-signos" class="page">
+        <div class="sub-header"><button class="back-btn" onclick="show('home')">←</button><h3>Signos Vitales</h3></div>
+        <div class="content-area"><p>Monitoreo de constantes vitales.</p></div>
     </div>
 
     <script>
-        function showPage(pageId) {
-            // Ocultar todas las páginas
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.classList.remove('active'));
-            
-            // Mostrar la seleccionada
-            document.getElementById(pageId).classList.add('active');
+        function show(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
     </script>
-
 </body>
 </html>
-
-
