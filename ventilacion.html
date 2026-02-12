@@ -1,61 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventilación e Inhaloterapia</title>
-    <style>
-        body { font-family: sans-serif; padding: 15px; background: #f0f4f8; }
-        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        h2 { color: #c62828; text-align: center; border-bottom: 2px solid #ffcdd2; padding-bottom: 10px; }
-        .section-title { font-weight: bold; color: #b71c1c; margin-top: 15px; display: block; background: #ffebee; padding: 5px 10px; border-radius: 5px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85em; }
-        th, td { border: 1px solid #eee; padding: 8px; text-align: left; }
-        th { background: #f8f9fa; }
-        .info-box { background: #e8f5e9; padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.85em; border-left: 5px solid #4caf50; }
-        .volver { display: block; text-align: center; margin-top: 25px; text-decoration: none; color: #666; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventilación Neonatal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f9ff;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #0099cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0066cc;
+    }
+    .resultados {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e6f2ff;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Módulo de Ventilación</h1>
+  <form id="ventilacionForm">
+    <label>Paciente</label>
+    <input type="text" id="paciente" required>
 
-<div class="card">
-    <h2>💨 Inhaloterapia y Ventilación</h2>
+    <label>Responsable</label>
+    <input type="text" id="responsable" required>
 
-    <span class="section-title">Modos Ventilatorios Convencionales</span>
-    <table>
-        <tr><th>Modo</th><th>Descripción</th></tr>
-        <tr><td><b>AC (Asistido/Controlado)</b></td><td>El ventilador entrega un ciclo ante cada esfuerzo del bebé.</td></tr>
-        <tr><td><b>SIMV</b></td><td>Sincroniza ciclos mandatorios con el esfuerzo del paciente.</td></tr>
-        <tr><td><b>CPAP</b></td><td>Presión positiva continua. El bebé respira espontáneamente.</td></tr>
-    </table>
+    <label>Fecha</label>
+    <input type="date" id="fecha" required>
 
-    <span class="section-title">Parámetros Iniciales Sugeridos</span>
-    <table>
-        <tr><th>Parámetro</th><th>Rango Neonatal</th></tr>
-        <tr><td>PIP (Presión Inspiratoria)</td><td>15 - 20 cmH2O</td></tr>
-        <tr><td>PEEP</td><td>4 - 6 cmH2O</td></tr>
-        <tr><td>FiO2</td><td>Mínima para SatO2 90-95%</td></tr>
-        <tr><td>Frecuencia (FR)</td><td>40 - 60 rpm</td></tr>
-        <tr><td>Tiempo Insp. (Ti)</td><td>0.30 - 0.45 seg</td></tr>
-    </table>
+    <label>FiO₂ (%)</label>
+    <input type="number" id="fio2" min="21" max="100" required>
 
-    <span class="section-title">Inhaloterapia y Aerosolterapia</span>
-    <div class="info-box">
-        <strong>Dispositivos:</strong><br>
-        • <b>Cánula de Alto Flujo:</b> Flujos de 2-8 L/min. Humidificación activa.<br>
-        • <b>Micronebulizaciones:</b> Flujo de 6-8 L/min de O2 o aire.<br>
-        • <b>MDI con Espaciador:</b> Técnica preferida en ventilación mecánica (usar adaptador en Y).
-    </div>
+    <label>PEEP (cmH₂O)</label>
+    <input type="number" id="peep" min="0" max="20" required>
 
-    <span class="section-title">Metas Gasométricas</span>
-    <p style="font-size: 0.85em; color: #444;">
-        • <b>pH:</b> 7.25 - 7.35 (Permisivo)<br>
-        • <b>pCO2:</b> 45 - 55 mmHg<br>
-        • <b>pO2:</b> 50 - 70 mmHg
-    </p>
+    <label>Volumen Tidal (ml)</label>
+    <input type="number" id="vt" min="1" required>
 
-    <a href="index.html" class="volver">← Volver al Menú</a>
-</div>
+    <label>Frecuencia Respiratoria (rpm)</label>
+    <input type="number" id="fr" min="1" required>
 
+    <label>Observaciones clínicas</label>
+    <textarea id="observaciones" rows="4"></textarea>
+
+    <button type="button" onclick="calcular()">Calcular parámetros</button>
+  </form>
+
+  <div class="resultados" id="resultados"></div>
+
+  <script>
+    function calcular() {
+      const vt = parseFloat(document.getElementById('vt').value);
+      const fr = parseFloat(document.getElementById('fr').value);
+
+      if (!isNaN(vt) && !isNaN(fr)) {
+        const volumenMinuto = vt * fr; // ml/min
+        document.getElementById('resultados').innerHTML = `
+          <h3>Resultados</h3>
+          <p><strong>Volumen Minuto:</strong> ${volumenMinuto} ml/min</p>
+          <p><strong>Relación I:E:</strong> cálculo pendiente según tiempo inspiratorio</p>
+        `;
+      } else {
+        document.getElementById('resultados').innerHTML = "<p>Por favor ingresa valores válidos.</p>";
+      }
+    }
+  </script>
 </body>
 </html>
