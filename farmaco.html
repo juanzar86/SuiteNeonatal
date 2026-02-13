@@ -1,56 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buscador de Dosis</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>Buscador de Dosis</h1>
-  </header>
-  <main>
-    <!-- Barra de búsqueda -->
-    <input type="text" id="search" placeholder="Buscar medicamento..." class="search-bar">
-
-    <!-- Tabla de medicamentos -->
-    <table id="tablaFarmacos" class="tabla">
-      <thead>
-        <tr>
-          <th>Medicamento</th>
-          <th>Concentración</th>
-          <th>Tiempo de Infusión</th>
-          <th>Estabilidad</th>
-          <th>Administración</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Ejemplo de filas, sustituye con tus 40+ medicamentos -->
-        <tr>
-          <td>Aciclovir</td><td>7 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td>
-        </tr>
-        <tr>
-          <td>Ampicilina</td><td>30 mg/ml</td><td>15-30 min</td><td>4h ambiente</td><td>Bolo</td>
-        </tr>
-        <tr>
-          <td>Gentamicina</td><td>10 mg/ml</td><td>30 min</td><td>24h con luz</td><td>Infusión</td>
-        </tr>
-        <!-- Aquí pegas todas las demás filas de tu vademécum -->
-      </tbody>
-    </table>
-  </main>
-
-  <!-- Script para búsqueda dinámica -->
-  <script>
-    document.getElementById('search').addEventListener('keyup', function() {
-      let filtro = this.value.toLowerCase();
-      let filas = document.querySelectorAll('#tablaFarmacos tbody tr');
-      filas.forEach(fila => {
-        let texto = fila.textContent.toLowerCase();
-        fila.style.display = texto.includes(filtro) ? '' : 'none';
-      });
-    });
-  </script>
-</body>
-</html>
+<tbody>
+  <tr><td>Aciclovir</td><td>7 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Ampicilina</td><td>30 mg/ml</td><td>15-30 min</td><td>4h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Gentamicina</td><td>10 mg/ml</td><td>30 min</td><td>24h con luz</td><td>Infusión</td></tr>
+  <tr><td>Cefotaxima</td><td>100 mg/ml</td><td>30 min</td><td>12h refrigerado</td><td>Infusión</td></tr>
+  <tr><td>Vancomicina</td><td>5 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Meropenem</td><td>20 mg/ml</td><td>30 min</td><td>6h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Cefepima</td><td>40 mg/ml</td><td>30 min</td><td>12h refrigerado</td><td>Infusión</td></tr>
+  <tr><td>Imipenem</td><td>25 mg/ml</td><td>30 min</td><td>4h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Linezolid</td><td>2 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Clindamicina</td><td>6 mg/ml</td><td>30 min</td><td>8h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Metronidazol</td><td>5 mg/ml</td><td>30 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Ceftriaxona</td><td>100 mg/ml</td><td>30 min</td><td>24h refrigerado</td><td>Infusión</td></tr>
+  <tr><td>Piperacilina/Tazobactam</td><td>45 mg/ml</td><td>30 min</td><td>12h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Azitromicina</td><td>2 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Eritromicina</td><td>5 mg/ml</td><td>30 min</td><td>8h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Amikacina</td><td>10 mg/ml</td><td>30 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Tobramicina</td><td>10 mg/ml</td><td>30 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Colistina</td><td>2 mg/ml</td><td>30 min</td><td>12h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Fluconazol</td><td>2 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Voriconazol</td><td>5 mg/ml</td><td>60 min</td><td>12h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Caspofungina</td><td>1 mg/ml</td><td>60 min</td><td>24h refrigerado</td><td>Infusión</td></tr>
+  <tr><td>Micafungina</td><td>1 mg/ml</td><td>60 min</td><td>24h refrigerado</td><td>Infusión</td></tr>
+  <tr><td>Amfotericina B</td><td>0.1 mg/ml</td><td>120 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Paracetamol</td><td>10 mg/ml</td><td>15 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Ibuprofeno</td><td>10 mg/ml</td><td>30 min</td><td>12h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Midazolam</td><td>1 mg/ml</td><td>2 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Diazepam</td><td>5 mg/ml</td><td>2 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Fentanilo</td><td>0.05 mg/ml</td><td>2 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Morfina</td><td>1 mg/ml</td><td>5 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Adrenalina</td><td>1 mg/ml</td><td>1 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Noradrenalina</td><td>1 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Dopamina</td><td>40 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Dobutamina</td><td>12.5 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Milrinona</td><td>1 mg/ml</td><td>60 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Insulina</td><td>100 UI/ml</td><td>60 min</td><td>24h refrigerado</td><td>Infusión</td></tr>
+  <tr><td>Hidrocortisona</td><td>50 mg/ml</td><td>5 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Dexametasona</td><td>4 mg/ml</td><td>5 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Prednisona</td><td>5 mg/ml</td><td>5 min</td><td>24h ambiente</td><td>Bolo</td></tr>
+  <tr><td>Omeprazol</td><td>4 mg/ml</td><td>30 min</td><td>12h ambiente</td><td>Infusión</td></tr>
+  <tr><td>Ranitidina</td><td>25 mg/ml</td><td>30 min</td><td>24h ambiente</td><td>Infusión</td></tr>
+</tbody>
