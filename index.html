@@ -7,66 +7,82 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Suite Neonatal</h1>
-  </header>
-  <main class="grid">
-    <a href="apgar.html" class="card">
-      <img src="icons/baby.svg" alt="Apgar" class="icon">
-      Escala Apgar
-    </a>
-    <a href="farmaco.html" class="card">
-      <img src="icons/pill.svg" alt="Farmaco" class="icon">
-      Buscador de Dosis
-    </a>
-    <a href="neumonia.html" class="card">
-      <img src="icons/lungs.svg" alt="Neumonía" class="icon">
-      Neumonía
-    </a>
-    <a href="silverman.html" class="card">
-      <img src="icons/lungs.svg" alt="Silverman" class="icon">
-      Escala Silverman
-    </a>
-    <a href="signos.html" class="card">
-      <img src="icons/heart.svg" alt="Signos Vitales" class="icon">
-      Signos Vitales
-    </a>
-    <a href="signosneu.html" class="card">
-      <img src="icons/brain.svg" alt="Neurológicos" class="icon">
-      Signos Neurológicos
-    </a>
-    <a href="hoja.html" class="card">
-      <img src="icons/clipboard.svg" alt="Hoja" class="icon">
-      Hoja de Enfermería
-    </a>
-    <a href="ventilacion.html" class="card">
-      <img src="icons/ventilator.svg" alt="Ventilación" class="icon">
-      Ventilación
-    </a>
-    <a href="upp.html" class="card">
-      <img src="icons/bed.svg" alt="Úlceras" class="icon">
-      Riesgo de Úlceras
-    </a>
-    <a href="marsi.html" class="card">
-      <img src="icons/bandage.svg" alt="Marsi" class="icon">
-      Lesiones por Adhesivos
-    </a>
-    <a href="caidas.html" class="card">
-      <img src="icons/warning.svg" alt="Caídas" class="icon">
-      Riesgo de Caídas
-    </a>
-    <a href="laboratorio.html" class="card">
-      <img src="icons/test-tube.svg" alt="Laboratorio" class="icon">
-      Laboratorio
-    </a>
-    <a href="pae.html" class="card">
-      <img src="icons/book.svg" alt="PAE" class="icon">
-      Proceso de Atención
-    </a>
-    <a href="recursos.html" class="card">
-      <img src="icons/folder.svg" alt="Recursos" class="icon">
-      Recursos
-    </a>
-  </main>
+  <h1>Suite Neonatal</h1>
+
+  <div class="container">
+    <!-- Bloque Ventilador -->
+    <div class="bloque">
+      <h2>Ventilador</h2>
+      <div class="icono">
+        <img src="img/ventilador.svg" alt="Ventilador Neonatal">
+      </div>
+      <div class="card"><a href="silverman.html">Silverman</a></div>
+      <div class="card"><a href="ventilacion.html">Ventilación</a></div>
+      <div class="card"><a href="neumonia.html">Neumonía</a></div>
+    </div>
+
+    <!-- Bloque Incubadora -->
+    <div class="bloque">
+      <h2>Incubadora</h2>
+      <div class="icono">
+        <img src="img/incubadora.svg" alt="Incubadora Neonatal">
+      </div>
+      <div class="card"><a href="apgar.html">Apgar</a></div>
+      <div class="card"><a href="ballard.html">Ballard</a></div>
+      <div class="card"><a href="capurro.html">Capurro</a></div>
+    </div>
+
+    <!-- Bloque Monitor -->
+    <div class="bloque">
+      <h2>Monitor</h2>
+      <div class="icono">
+        <img src="img/monitor.svg" alt="Monitor Neonatal">
+      </div>
+      <div class="card"><a href="signos.html">Signos Vitales</a></div>
+      <div class="card"><a href="signosneu.html">Signos Neurológicos</a></div>
+      <div class="card"><a href="oximetria.html">Oximetría</a></div>
+    </div>
+
+    <!-- Bloque Fototerapia -->
+    <div class="bloque">
+      <h2>Fototerapia</h2>
+      <div class="icono">
+        <img src="img/fototerapia.svg" alt="Fototerapia Neonatal">
+      </div>
+      <div class="card"><a href="bilirrubina.html">Bilirrubina</a></div>
+    </div>
+
+    <!-- Bloque Farmacia -->
+    <div class="bloque">
+      <h2>Farmacia</h2>
+      <div class="icono">
+        <img src="img/farmacia.svg" alt="Farmacia Neonatal">
+      </div>
+      <div class="card"><a href="farmaco.html">Farmacología</a></div>
+      <div class="card"><a href="laboratorio.html">Laboratorio</a></div>
+      <div class="card"><a href="pae.html">Proceso de Atención</a></div>
+      <div class="card"><a href="recursos.html">Recursos</a></div>
+    </div>
+
+    <!-- Bloque Seguridad -->
+    <div class="bloque">
+      <h2>Seguridad</h2>
+      <div class="icono">
+        <img src="img/seguridad.svg" alt="Seguridad Neonatal">
+      </div>
+      <div class="card"><a href="upp.html">Riesgo de Úlceras</a></div>
+      <div class="card"><a href="marsi.html">Lesiones por Adhesivos</a></div>
+      <div class="card"><a href="caidas.html">Riesgo de Caídas</a></div>
+    </div>
+
+    <!-- Bloque Enfermería -->
+    <div class="bloque">
+      <h2>Enfermería</h2>
+      <div class="icono">
+        <img src="img/enfermeria.svg" alt="Hoja de Enfermería">
+      </div>
+      <div class="card"><a href="hoja.html">Hoja de Enfermería</a></div>
+    </div>
+  </div>
 </body>
 </html>
