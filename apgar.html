@@ -1,31 +1,103 @@
-<header>
-  <h1>Escala Apgar</h1>
-</header>
-<main>
-  <form id="apgarForm">
-    <!-- Parámetros con select -->
-    <label>Color:
-      <select name="color">
-        <option value="0">0 - Cianótico</option>
-        <option value="1">1 - Acrocianótico</option>
-        <option value="2">2 - Rosado</option>
-      </select>
-    </label>
-    <!-- Repite para respiración, tono, reflejos, frecuencia -->
-    <button type="button" onclick="calcularApgar()">Calcular</button>
-  </form>
-  <div id="resultado"></div>
-</main>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora APGAR - Suite Neonatal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: sans-serif; }
+        .card { border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        #resultado { font-size: 2rem; font-weight: bold; }
+        .diag { font-size: 1.2rem; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="container py-4">
+    <a href="index.html" class="btn btn-outline-secondary mb-3">← Volver al Panel</a>
+    <div class="card p-4">
+        <h2 class="text-center text-primary mb-4">Calculadora APGAR</h2>
+        
+        <form id="apgarForm">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Frecuencia Cardíaca</label>
+                <select class="form-select" id="p1" onchange="calcular()">
+                    <option value="0">Ausente (0 pts)</option>
+                    <option value="1">< 100 lpm (1 pt)</option>
+                    <option value="2">> 100 lpm (2 pts)</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Esfuerzo Respiratorio</label>
+                <select class="form-select" id="p2" onchange="calcular()">
+                    <option value="0">Ausente (0 pts)</option>
+                    <option value="1">Lento, irregular (1 pt)</option>
+                    <option value="2">Llanto fuerte (2 pts)</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Tono Muscular</label>
+                <select class="form-select" id="p3" onchange="calcular()">
+                    <option value="0">Flácido (0 pts)</option>
+                    <option value="1">Cierta flexión (1 pt)</option>
+                    <option value="2">Movimiento activo (2 pts)</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Irritabilidad Refleja</label>
+                <select class="form-select" id="p4" onchange="calcular()">
+                    <option value="0">Sin respuesta (0 pts)</option>
+                    <option value="1">Muecas (1 pt)</option>
+                    <option value="2">Llanto, tos o estornudo (2 pts)</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Color de Piel</label>
+                <select class="form-select" id="p5" onchange="calcular()">
+                    <option value="0">Cianosis total / Palidez (0 pts)</option>
+                    <option value="1">Cianosis distal (1 pt)</option>
+                    <option value="2">Rosado (2 pts)</option>
+                </select>
+            </div>
+        </form>
+
+        <div class="mt-4 p-3 border-top text-center">
+            <div class="text-muted">Puntaje Total:</div>
+            <div id="resultado" class="text-primary">0</div>
+            <div id="diagnostico" class="diag"></div>
+        </div>
+    </div>
+</div>
 
 <script>
-function calcularApgar() {
-  let selects = document.querySelectorAll('#apgarForm select');
-  let total = 0;
-  selects.forEach(sel => total += parseInt(sel.value));
-  let mensaje = '';
-  if (total <= 3) mensaje = 'Apgar bajo (grave)';
-  else if (total <= 6) mensaje = 'Apgar intermedio (moderado)';
-  else mensaje = 'Apgar alto (buena condición)';
-  document.getElementById('resultado').textContent = `Puntaje: ${total} → ${mensaje}`;
+function calcular() {
+    let p1 = parseInt(document.getElementById('p1').value);
+    let p2 = parseInt(document.getElementById('p2').value);
+    let p3 = parseInt(document.getElementById('p3').value);
+    let p4 = parseInt(document.getElementById('p4').value);
+    let p5 = parseInt(document.getElementById('p5').value);
+    
+    let total = p1 + p2 + p3 + p4 + p5;
+    document.getElementById('resultado').innerText = total;
+
+    let diag = document.getElementById('diagnostico');
+    if(total >= 7) {
+        diag.innerText = "Recién nacido estable";
+        diag.className = "diag text-success";
+    } else if(total >= 4) {
+        diag.innerText = "Dificultad moderada";
+        diag.className = "diag text-warning";
+    } else {
+        diag.innerText = "Dificultad grave - Reanimación inmediata";
+        diag.className = "diag text-danger";
+    }
 }
+// Ejecutar al cargar para mostrar el 0 inicial
+calcular();
 </script>
+</body>
+</html>
